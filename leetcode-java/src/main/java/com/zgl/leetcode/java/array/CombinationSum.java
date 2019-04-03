@@ -61,7 +61,7 @@ public class CombinationSum {
 		}
 	}
 
-	private void helper1(int[] candidates, int pos, int remain, List<List<Integer>> result, List<Integer> answer) {
+	private void helper2(int[] candidates, int pos, int remain, List<List<Integer>> result, List<Integer> answer) {
 		if (remain < 0) {
 			return;
 		} else if (remain == 0) {
@@ -72,12 +72,25 @@ public class CombinationSum {
 					continue;
 				}
 				answer.add(candidates[i]);
-				helper1(candidates, i + 1, remain - candidates[i], result, answer);
+				helper2(candidates, i + 1, remain - candidates[i], result, answer);
 				answer.remove(answer.size() - 1);
 			}
 		}
 	}
 
+	private void helper3(int[] candidates, int pos, int remain, int num, List<List<Integer>> result, List<Integer> answer) {
+		if (remain > 0 && num > 0) {
+			for (int i = pos; i < 9; i++) {
+				answer.add(candidates[i]);
+				helper3(candidates, i + 1, remain - candidates[i], num - 1, result, answer);
+				answer.remove(answer.size() - 1);
+			}
+		} else if (remain == 0 && num == 0) {
+			result.add(new ArrayList<>(answer));
+		} else {
+			return;
+		}
+	}
 	/**
 	 * 40. Combination Sum II
 	 * Given a collection of candidate numbers (candidates) and a target number (target),
@@ -112,7 +125,33 @@ public class CombinationSum {
 		List<List<Integer>> result = new ArrayList<>();
 		List<Integer> answer = new ArrayList<>(candidates.length);
 		Arrays.sort(candidates);
-		helper1(candidates, 0, target, result, answer);
+		helper2(candidates, 0, target, result, answer);
+		return result;
+	}
+
+	/**
+	 * 216. Combination Sum III
+	 * Find all possible combinations of k numbers that add up to a number n,
+	 * given that only numbers from 1 to 9 can be used and each combination should be a unique set of numbers.
+	 *
+	 * Note:
+	 *
+	 * All numbers will be positive integers.
+	 * The solution set must not contain duplicate combinations.
+	 * Example 1:
+	 *
+	 * Input: k = 3, n = 7
+	 * Output: [[1,2,4]]
+	 * Example 2:
+	 *
+	 * Input: k = 3, n = 9
+	 * Output: [[1,2,6], [1,3,5], [2,3,4]]
+	 */
+	public List<List<Integer>> combinationSum3(int k, int n) {
+		List<List<Integer>> result = new ArrayList<>();
+		List<Integer> answer = new ArrayList<>(9);
+		int[] candidates = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+		helper3(candidates, 0, n, k, result, answer);
 		return result;
 	}
 
@@ -120,6 +159,6 @@ public class CombinationSum {
 
 	public static void main(String[] args) {
 		int[] candidates = {2,5,2,1,2};
-		System.out.println(new CombinationSum().combinationSum2(candidates, 7));
+		System.out.println(new CombinationSum().combinationSum3(3, 9));
 	}
 }
