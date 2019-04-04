@@ -19,37 +19,38 @@ public class Palidromic {
 	 * Input: "cbbd"
 	 * Output: "bb"
 	 */
-	public String longestPalindrome(String s){
-		if(s.length()<=1){
+	public String longestPalindrome(String s) {
+		if (s.length() <= 1) {
 			return s;
 		}
-		String result="";
-		int left,right;
-		for(int i=0;i<s.length();i++){
-			left=i;
-			right=i;
-			String temp=getCurrentPalindrome(s,left,right);
-			if(temp.length()>result.length()){
-				result=temp;
+		String result = "";
+		int left, right;
+		for (int i = 0; i < s.length(); i++) {
+			left = i;
+			right = i;
+			String temp = getCurrentPalindrome(s, left, right);
+			if (temp.length() > result.length()) {
+				result = temp;
 			}
-			right=i+1;
-			temp=getCurrentPalindrome(s,left,right);
-			if(temp.length()>result.length()){
-				result=temp;
+			right = i + 1;
+			temp = getCurrentPalindrome(s, left, right);
+			if (temp.length() > result.length()) {
+				result = temp;
 			}
 		}
 		return result;
 	}
-	public String getCurrentPalindrome(String s,int left,int right){
-		while(left>=0&&right<s.length()){
-			if(s.charAt(left)!=s.charAt(right)){
+
+	public String getCurrentPalindrome(String s, int left, int right) {
+		while (left >= 0 && right < s.length()) {
+			if (s.charAt(left) != s.charAt(right)) {
 				break;
-			}else {
+			} else {
 				left--;
 				right++;
 			}
 		}
-		return s.substring(left+1,right);
+		return s.substring(left + 1, right);
 	}
 
 	/**

@@ -28,15 +28,15 @@ public class Palidromic {
 	 * Coud you solve it without converting the integer to a string?
 	 */
 	public boolean isPalindrome(int x) {
-		if(x<0){
+		if (x < 0) {
 			return false;
 		}
-		int target=0,current=x;
-		while(current!=0){
-			target=target*10+current%10;
-			current=current/10;
+		int target = 0, current = x;
+		while (current != 0) {
+			target = target * 10 + current % 10;
+			current = current / 10;
 		}
-		return target==x;
+		return target == x;
 	}
 
 	public static void main(String[] args) {

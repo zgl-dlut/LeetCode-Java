@@ -30,17 +30,17 @@ public class LongestSubstring {
 	 * Explanation: The answer is "wke", with the length of 3.
 	 *              Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
 	 */
-	public int lengthOfLongestSubstring(String s){
-		if(s.length()==0){
+	public int lengthOfLongestSubstring(String s) {
+		if (s.length() == 0) {
 			return 0;
 		}
-		int[]dp=new int[256];
-		Arrays.fill(dp,-1);
-		int result=1,left=-1;
-		for(int i=0;i<s.length();i++){
-			left=Math.max(left,dp[s.charAt(i)]);
-			dp[s.charAt(i)]=i;
-			result=Math.max(result,i-left);
+		int[] dp = new int[256];
+		Arrays.fill(dp, -1);
+		int result = 1, left = -1;
+		for (int i = 0; i < s.length(); i++) {
+			left = Math.max(left, dp[s.charAt(i)]);
+			dp[s.charAt(i)] = i;
+			result = Math.max(result, i - left);
 		}
 		return result;
 	}

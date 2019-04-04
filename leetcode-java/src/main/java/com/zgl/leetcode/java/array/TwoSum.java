@@ -14,13 +14,13 @@ package com.zgl.leetcode.java.array;
  */
 public class TwoSum {
 	public int[] twoSum(int[] nums, int target){
-		int [] result=new int[2];
+		int[] result = new int[2];
 		//Arrays.sort(nums);
-		for(int i=0;i<nums.length;i++){
-			for(int j=i+1;j<nums.length;j++){
-				if(nums[i]+nums[j]==target){
-					result[0]=i;
-					result[1]=j;
+		for (int i = 0; i < nums.length; i++) {
+			for (int j = i + 1; j < nums.length; j++) {
+				if (nums[i] + nums[j] == target) {
+					result[0] = i;
+					result[1] = j;
 				}
 			}
 		}
@@ -28,11 +28,11 @@ public class TwoSum {
 	}
 
 	public static void main(String[] args) {
-		TwoSum twoSum=new TwoSum();
-		int []nums= {3,2,4};
-		int target=7;
-		int[]result=twoSum.twoSum(nums,target);
-		for(int i=0;i<result.length;i++){
+		TwoSum twoSum = new TwoSum();
+		int[] nums = {3, 2, 4};
+		int target = 7;
+		int[] result = twoSum.twoSum(nums, target);
+		for (int i = 0; i < result.length; i++) {
 			System.out.println(result[i]);
 		}
 	}
