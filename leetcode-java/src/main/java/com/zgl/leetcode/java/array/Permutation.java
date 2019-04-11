@@ -76,12 +76,61 @@ public class Permutation {
 		return result;
 	}
 
+	public List<List<Integer>> permuteUnique(int[] nums) {
+		List<List<Integer>> res = new ArrayList<>();
+		List<Integer> list = new ArrayList<>();
+		/**
+		 * 初始化均为false
+		 */
+		boolean[] used = new boolean[nums.length];
+		Arrays.sort(nums);
+		dfs(nums, used, list, res);
+		return res;
+	}
+
+	/*
+		private void dfs(int[] nums, boolean[] used, List<Integer> list, List<List<Integer>> res) {
+			if (list.size() == nums.length) {
+				res.add(new ArrayList<>(list));
+				return;
+			}
+			for (int i = 0; i < nums.length; i++) {
+				if (!used[i]) {
+					used[i] = true;
+					list.add(nums[i]);
+					dfs(nums, used, list, res);
+					used[i] = false;
+					list.remove(list.size() - 1);
+				}
+			}
+		}
+	*/
+	private void dfs(int[] nums, boolean[] used, List<Integer> list, List<List<Integer>> res) {
+		if (list.size() == nums.length) {
+			res.add(new ArrayList<>(list));
+			return;
+		}
+		for (int i = 0; i < nums.length; i++) {
+			if (used[i]) {
+				continue;
+			}
+			if (i > 0 && nums[i] == nums[i - 1] && !used[i - 1]) {
+				continue;
+			}
+			used[i] = true;
+			list.add(nums[i]);
+			dfs(nums, used, list, res);
+			used[i] = false;
+			list.remove(list.size() - 1);
+		}
+	}
+
 	public static void main(String[] args) {
-		int[] nums={1,2,3};
+		int[] nums = {1, 2, 3};
 		new Permutation().permute(nums);
-		List<Integer>temp=Arrays.asList(1,2,3);
-		List<Integer>list= new ArrayList<>(temp);
-		list.add(0,9);
+		List<Integer> temp = Arrays.asList(1, 2, 3);
+		List<Integer> list = new ArrayList<>(temp);
+		list.add(0, 9);
 		System.out.println(list);
 	}
 }
