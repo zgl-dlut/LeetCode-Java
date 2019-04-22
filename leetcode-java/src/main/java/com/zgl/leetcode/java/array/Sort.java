@@ -87,18 +87,19 @@ public class Sort {
 
 	/**
 	 * 归并排序
+	 *
 	 * @param numbers
 	 * @param left
 	 * @param right
 	 * @return
 	 */
-	public int[] mergeSort(int []numbers,int left,int right){
-		int []temp=new int[numbers.length];
-		if(left<right){
-			int middle=(left+right)/2;
-			mergeSort(numbers,left,middle);
-			mergeSort(numbers,middle+1,right);
-			mergePartition(numbers,left,middle,right,temp);
+	public int[] mergeSort(int[] numbers, int left, int right) {
+		int[] temp = new int[numbers.length];
+		if (left < right) {
+			int middle = (left + right) / 2;
+			mergeSort(numbers, left, middle);
+			mergeSort(numbers, middle + 1, right);
+			mergePartition(numbers, left, middle, right, temp);
 		}
 		return numbers;
 	}
@@ -106,16 +107,16 @@ public class Sort {
 	/**
 	 * 归并排序分治
 	 */
-	public void mergePartition(int []numbers,int left,int middle,int right,int []temp){
-		int i=left;
-		int tag=0;
-		int j=middle+1;
-		while(i<=middle&&j<=right){
-			while(i<=middle&&numbers[i]<=numbers[j]){
-				temp[tag++]=numbers[i++];
+	public void mergePartition(int[] numbers, int left, int middle, int right, int[] temp) {
+		int i = left;
+		int tag = 0;
+		int j = middle + 1;
+		while (i <= middle && j <= right) {
+			while (i <= middle && numbers[i] <= numbers[j]) {
+				temp[tag++] = numbers[i++];
 			}
-			while(j<=right&&numbers[i]>numbers[j]){
-				temp[tag++]=numbers[j++];
+			while (j <= right && numbers[i] > numbers[j]) {
+				temp[tag++] = numbers[j++];
 			}
 			/*if(numbers[i]<=numbers[j]){
 				temp[tag++]=numbers[i++];
@@ -123,18 +124,18 @@ public class Sort {
 				temp[tag++]=numbers[j++];
 			}*/
 		}
-		while (i<=middle){
-			temp[tag++]=numbers[i++];
+		while (i <= middle) {
+			temp[tag++] = numbers[i++];
 		}
-		while(j<=right){
-			temp[tag++]=numbers[j++];
+		while (j <= right) {
+			temp[tag++] = numbers[j++];
 		}
-		tag=0;
-		while (left<=right){
-			numbers[left++]=temp[tag++];
+		tag = 0;
+		while (left <= right) {
+			numbers[left++] = temp[tag++];
 		}
-		for (int num:numbers){
-			System.out.print(num+" ");
+		for (int num : numbers) {
+			System.out.print(num + " ");
 		}
 		System.out.println();
 	}
@@ -145,12 +146,12 @@ public class Sort {
 		//int[] quickResult = mock.quickSort(numbers, 0, 7);
 		//int[] buddleResult = mock.bubbleSort(numbers);
 		//int []mergeResult=mock.mergeSort(numbers,0,7);
-		Map<Integer,Integer>orderMap=new HashMap<>();
-		orderMap.put(49,1);
-		orderMap.put(38,2);
-		orderMap.put(65,3);
-		orderMap.put(97,4);
-		List<Integer>list=new ArrayList<>();
+		Map<Integer, Integer> orderMap = new HashMap<>();
+		orderMap.put(49, 1);
+		orderMap.put(38, 2);
+		orderMap.put(65, 3);
+		orderMap.put(97, 4);
+		List<Integer> list = new ArrayList<>();
 		list.add(49);
 		list.add(38);
 		list.add(65);
@@ -158,7 +159,7 @@ public class Sort {
 		/*Collections.sort(list, (Integer o1, Integer o2)-> o2-o1);
 		list.sort((Integer o1, Integer o2)-> o2-o1);*/
 
-		list.sort(Comparator.comparingInt(o1->orderMap.get(o1)));
-		list.stream().forEach(i-> System.out.println(i));
+		list.sort(Comparator.comparingInt(o1 -> orderMap.get(o1)));
+		list.stream().forEach(i -> System.out.println(i));
 	}
 }
