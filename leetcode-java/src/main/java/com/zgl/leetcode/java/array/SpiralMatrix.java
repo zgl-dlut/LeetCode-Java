@@ -68,8 +68,58 @@ public class SpiralMatrix {
 		return result;
 	}
 
+	/**
+	 * 59. Spiral Matrix II
+	 * Given a positive integer n, generate a square matrix filled with elements from 1 to n2 in spiral order.
+	 *
+	 * Example:
+	 *
+	 * Input: 3
+	 * Output:
+	 * [
+	 *  [ 1, 2, 3 ],
+	 *  [ 8, 9, 4 ],
+	 *  [ 7, 6, 5 ]
+	 * ]
+	 */
+	public int[][] generateMatrix(int n) {
+		int[][] result = new int[n][n];
+		int left = 0, right = n - 1, top = 0, bottom = n - 1, tag = 1;
+		while (tag <= n * n) {
+			for (int i = left; i <= right; i++, tag++) {
+				result[top][i] = tag;
+			}
+			top++;
+			if (tag <= n * n) {
+				for (int i = top; i <= bottom; i++, tag++) {
+					result[i][right] = tag;
+				}
+			}
+			right--;
+			if (tag <= n * n) {
+				for (int i = right; i >= left; i--, tag++) {
+					result[bottom][i] = tag;
+				}
+			}
+			bottom--;
+			if (tag <= n * n) {
+				for (int i = bottom; i >= top; i--, tag++) {
+					result[i][left] = tag;
+				}
+			}
+			left++;
+		}
+		return result;
+	}
+
 	public static void main(String[] args) {
-		int[][] matrix = {/*{1,2,3,4},{5,6,7,8},{9,10,11,12}*/};
-		System.out.println(new SpiralMatrix().spiralOrder(matrix));
+		int n = 4;
+		int[][] matrix = new SpiralMatrix().generateMatrix(n);
+		for(int i = 0;i < n;i ++){
+			for(int j=0;j<n;j++){
+				System.out.print(matrix[i][j]+" ");
+			}
+			System.out.println();
+		}
 	}
 }
