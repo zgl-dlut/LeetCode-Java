@@ -6,8 +6,6 @@ package com.zgl.leetcode.java.linkedlist;
  * @date 2018/11/25 下午7:46
  */
 
-import com.zgl.leetcode.java.linkedlist.ListNode;
-
 /**
  * 21. Merge Two Sorted Lists
  * Input: 1->2->4, 1->3->4

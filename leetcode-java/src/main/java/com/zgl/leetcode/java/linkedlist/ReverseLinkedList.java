@@ -1,7 +1,5 @@
 package com.zgl.leetcode.java.linkedlist;
 
-import com.zgl.leetcode.java.linkedlist.ListNode;
-
 /**
  * @author zgl
  * @date 2018/12/2 下午1:31
