@@ -7,6 +7,55 @@ import java.util.*;
  * @date 2018/11/26 下午9:05
  */
 public class Sort {
+
+	/**
+	 * 直接插入排序
+	 */
+	public int[] directInsertSort(int[] array) {
+		int i, j, temp;
+		for (i = 1; i < array.length; i++) {
+			temp = array[i];
+			j = i;
+			while (j > 0 && temp < array[j - 1]) {
+				array[j] = array[j - 1];
+				j--;
+			}
+			array[j] = temp;
+			for (int k : array) {
+				System.out.print(k + " ");
+			}
+			System.out.println();
+		}
+		return array;
+	}
+	/**
+	 * 折半插入排序
+	 */
+	public int[] binaryInsertSort(int[] array){
+		int left, right, mid, i, j, temp;
+		for (i = 1; i < array.length; i++) {
+			left = 0;
+			right = i - 1;
+			while (left <= right) {
+				mid = (left + right) / 2;
+				if (array[mid] <= array[i]) {
+					left = mid + 1;
+				} else {
+					right = mid - 1;
+				}
+			}
+			temp = array[i];
+			for (j = i; j - 1 > right; j--) {
+				array[j] = array[j - 1];
+			}
+			array[right + 1] = temp;
+			for (int k : array) {
+				System.out.print(k + " ");
+			}
+			System.out.println();
+		}
+		return array;
+	}
 	/**
 	 * 冒泡排序
 	 */
@@ -225,7 +274,9 @@ public class Sort {
 		//System.out.println("改进冒泡排序");
 		//mock.bubbleSortAdvanced(numbers);
 		//mock.mergeSort(numbers,0,7);
-		mock.heapSort(numbers);
+		//mock.heapSort(numbers);
+		//mock.directInsertSort(numbers);
+		mock.binaryInsertSort(numbers);
 		Map<Integer, Integer> orderMap = new HashMap<>();
 		orderMap.put(49, 1);
 		orderMap.put(38, 2);
