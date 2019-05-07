@@ -1,4 +1,4 @@
-package com.zgl.leetcode.java.array;
+package com.zgl.leetcode.java.backtracking;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -108,6 +108,7 @@ public class Permutation {
 	private void dfs(int[] nums, boolean[] used, List<Integer> list, List<List<Integer>> res) {
 		if (list.size() == nums.length) {
 			res.add(new ArrayList<>(list));
+			System.out.println(res);
 			return;
 		}
 		for (int i = 0; i < nums.length; i++) {
@@ -126,8 +127,8 @@ public class Permutation {
 	}
 
 	public static void main(String[] args) {
-		int[] nums = {1, 2, 3};
-		new Permutation().permute(nums);
+		int[] nums = {1, 1, 2};
+		new Permutation().permuteUnique(nums);
 		List<Integer> temp = Arrays.asList(1, 2, 3);
 		List<Integer> list = new ArrayList<>(temp);
 		list.add(0, 9);
