@@ -23,6 +23,28 @@ public class BinaryTree {
 		}
 	}
 
+	public int maxDepth(TreeNode root) {
+		if (root == null) {
+			return 0;
+		}
+		int result = 0;
+		Queue<TreeNode> queue = new LinkedList<>();
+		queue.offer(root);
+		while (!queue.isEmpty()) {
+			++result;
+			for (int i = 0, n = queue.size(); i < n; i++) {
+				TreeNode top = queue.poll();
+				if (top.left != null) {
+					queue.offer(top.left);
+				}
+				if (top.right != null) {
+					queue.offer(top.right);
+				}
+			}
+		}
+		return result;
+	}
+
 	/**
 	 * 节点个数
 	 */
@@ -133,37 +155,51 @@ public class BinaryTree {
 	public void postOrder1(TreeNode root){
 		Stack<TreeNode>stack1=new Stack<>();
 		Stack<TreeNode>stack2=new Stack<>();
-		while(root!=null||!stack1.empty()){
-			while (root!=null){
-				stack1.push(root);
-				stack2.push(root);
-				root=root.right;
-			}if(!stack1.empty()){
-				TreeNode top=stack1.pop();
-				root=top.left;
+		stack1.push(root);
+		while (!stack1.empty()){
+			TreeNode top = stack1.pop();
+			/**
+			 * s2根 右 左
+			 */
+			stack2.push(top);
+			/**
+			 * s1左节点 右节点
+			 */
+			if (top.left != null){
+				stack1.push(top.left);
+			}
+			if (top.right != null){
+				stack1.push(top.right);
 			}
 		}
 		while (!stack2.empty()){
-			TreeNode top=stack1.pop();
+			/**
+			 * 左 右 根
+			 */
+			TreeNode top=stack2.pop();
 			visit(top);
 		}
 	}
 	public void postOrder2(TreeNode root){
 		Stack<TreeNode>stack=new Stack<>();
 		TreeNode pre=null;
-		stack.push(root);
-		while(!stack.empty()){
-			root=stack.peek();
-			if((root.left==null&&root.right==null)||(pre!=null&&(root.left==pre||root.right==pre))){
-				TreeNode top=stack.pop();
-				visit(top);
-				pre=top;
-			}else {
-				if(root.right!=null){
-					stack.push(root.right);
-				}
-				if(root.left!=null){
-					stack.push(root.left);
+		while(root != null || !stack.empty()){
+			while (root != null){
+				stack.push(root);
+				root = root.left;
+			}
+			if (!stack.empty()){
+				TreeNode top =stack.peek();
+				/**
+				 * 右节点为空，或者已经访问过了，弹栈、访问、标记
+				 */
+				if (top.right == null || top.right == pre){
+					visit(top);
+					pre =top;
+					root = null;
+					stack.pop();
+				}else {
+					root = top.right;
 				}
 			}
 		}
