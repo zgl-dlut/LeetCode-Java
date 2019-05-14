@@ -107,10 +107,8 @@ public class Traversal {
 	}
 
 	public List<List<Integer>> levelOrder2(TreeNode root) {
-		List<List<Integer>> result = new ArrayList<List<Integer>>();
-
+		List<List<Integer>> result = new ArrayList<>();
 		levelRecursion(root, result, 0);
-
 		return result;
 	}
 
@@ -129,7 +127,6 @@ public class Traversal {
 			result.add(new ArrayList<>());
 		}
 		result.get(level).add(node.val);
-
 		levelRecursion(node.left, result, level + 1);
 		levelRecursion(node.right, result, level + 1);
 	}

@@ -1,5 +1,8 @@
 package com.zgl.leetcode.java.tree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author zgl
  * @date 2019/5/12 下午10:47
@@ -35,5 +38,117 @@ public class PathSum {
 		}
 		return hasPathSum(root.left, sum - root.val) ||
 				hasPathSum(root.right, sum - root.val);
+	}
+
+	/**
+	 * 113. Path Sum II
+	 *
+	 * Given a binary tree and a sum, find all root-to-leaf paths where each path's sum equals the given sum.
+	 *
+	 * Note: A leaf is a node with no children.
+	 *
+	 * Example:
+	 *
+	 * Given the below binary tree and sum = 22,
+	 *
+	 *       5
+	 *      / \
+	 *     4   8
+	 *    /   / \
+	 *   11  13  4
+	 *  /  \    / \
+	 * 7    2  5   1
+	 * Return:
+	 *
+	 * [
+	 *    [5,4,11,2],
+	 *    [5,8,4,5]
+	 * ]
+	 *
+	 */
+	public List<List<Integer>> pathSum(TreeNode root, int sum) {
+		List<List<Integer>> result = new ArrayList<>();
+		if (root == null) {
+			return result;
+		}
+		List<Integer> answer = new ArrayList<>();
+		dfs(root, sum, answer, result);
+		return result;
+	}
+
+	private void dfs(TreeNode root, int sum, List<Integer> answer, List<List<Integer>> result) {
+		if (root == null) {
+			return;
+		}
+		answer.add(root.val);
+		sum -= root.val;
+		if (root.left == null && root.right == null) {
+			if (sum == 0) {
+				result.add(new ArrayList<>(answer));
+			}
+		} else {
+			dfs(root.left, sum, answer, result);
+			dfs(root.right, sum, answer, result);
+		}
+		answer.remove(answer.size() - 1);
+	}
+
+	/**
+	 * 124. Binary Tree Maximum Path Sum
+	 * Given a non-empty binary tree, find the maximum path sum.
+	 *
+	 * For this problem, a path is defined as any sequence of nodes from some starting node to any node in the tree along the parent-child connections.
+	 * The path must contain at least one node and does not need to go through the root.
+	 *
+	 * Example 1:
+	 *
+	 * Input: [1,2,3]
+	 *
+	 *        1
+	 *       / \
+	 *      2   3
+	 *
+	 * Output: 6
+	 * Example 2:
+	 *
+	 * Input: [-10,9,20,null,null,15,7]
+	 *
+	 *    -10
+	 *    / \
+	 *   9  20
+	 *     /  \
+	 *    15   7
+	 *
+	 * Output: 42
+	 */
+	private int max = Integer.MIN_VALUE;
+
+	public int maxPathSum(TreeNode root) {
+		if (root == null) {
+			return 0;
+		}
+		helper(root);
+		return max;
+	}
+
+	private int helper(TreeNode root) {
+		if (root == null) {
+			return 0;
+		}
+		int leftMax = helper(root.left);
+		int rightMax = helper(root.right);
+		/**
+		 * 当前节点连接其父节点的最大值(只是一条路径)
+		 */
+		int current = Math.max(Math.max(leftMax + root.val, rightMax + root.val), root.val);
+		/**
+		 * 当前节点路径最大值(包括上面和以当前为根的情况)
+		 */
+		int sum = Math.max(current, leftMax + rightMax + root.val);
+		max = Math.max(sum, max);
+		/**
+		 * 返回一条路径的最大值
+		 */
+		return current;
 	}
 }

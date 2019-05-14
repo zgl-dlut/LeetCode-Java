@@ -206,7 +206,7 @@ public class BinaryTree {
 	}
 
 	/**
-	 * 层次遍历
+	 * 层次遍历/广度优先遍历(BFS)
 	 */
 	public void levelOrder(TreeNode root){
 		Queue<TreeNode>queue=new LinkedList<>();
@@ -222,6 +222,14 @@ public class BinaryTree {
 			}
 		}
 	}
+
+	/**
+	 * 深度优先遍历(DFS)-就是前中后序遍历
+	 */
+	public void dfs(TreeNode root){
+
+	}
+
 
 	/**
 	 * 111. Minimum Depth of Binary Tree
