@@ -1,4 +1,4 @@
-package com.zgl.leetcode.java;
+package com.zgl.leetcode.java.datastructure;
 
 import java.util.*;
 
