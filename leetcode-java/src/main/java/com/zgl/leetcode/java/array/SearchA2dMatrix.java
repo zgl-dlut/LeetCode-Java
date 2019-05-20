@@ -131,6 +131,10 @@ public class SearchA2dMatrix {
 		}
 		return false;
 	}
+
+	/**
+	 * 从右上角开始搜索
+	 */
 	public boolean searchMatrix(int[][] matrix, int target) {
 		int m = matrix.length;
 		if (m == 0) {

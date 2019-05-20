@@ -268,7 +268,7 @@ public class Sort {
 	public static void main(String[] args) {
 		Sort mock = new Sort();
 		int[] numbers = {49, 38, 65, 97, 76, 13, 27, 49};
-		//mock.quickSort(numbers, 0, 7);
+		mock.quickSort(numbers, 0, 7);
 		//System.out.println("传统冒泡排序");
 		//mock.bubbleSort(numbers);
 		//System.out.println("改进冒泡排序");
