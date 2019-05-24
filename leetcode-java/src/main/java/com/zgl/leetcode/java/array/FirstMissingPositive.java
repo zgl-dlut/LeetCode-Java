@@ -50,11 +50,14 @@ public class FirstMissingPositive {
 		return length + 1;
 	}
 
-
-
+	static int i = 1;
+	static {
+		i = 2;
+	}
 	public static void main(String[] args) {
 		int[] nums = {3,4,-1,1};
 		int result = new FirstMissingPositive().firstMissingPositive(nums);
 		System.out.println(result);
+		System.out.println(FirstMissingPositive.i);
 	}
 }
