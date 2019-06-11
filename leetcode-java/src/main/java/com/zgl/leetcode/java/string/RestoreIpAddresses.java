@@ -10,8 +10,9 @@ import java.util.List;
 public class RestoreIpAddresses {
 
 	public static void main(String[] args) {
-		String s = "0000";
+		String s = "25525511135";
 		System.out.println(new RestoreIpAddresses().restoreIpAddresses(s));
+		System.out.println(s.substring(1));
 	}
 
 	/**
@@ -23,7 +24,7 @@ public class RestoreIpAddresses {
 	 * Input: "25525511135"
 	 * Output: ["255.255.11.135", "255.255.111.35"]
 	 */
-	public List<String> restoreIpAddresses(String s) {
+	public List<String> restoreIpAddresses1(String s) {
 		int length = s.length();
 		List<String> result = new ArrayList<>();
 		for (int i = 1; i < 4 && i < length - 2; i++) {
@@ -49,5 +50,35 @@ public class RestoreIpAddresses {
 			return false;
 		}
 		return true;
+	}
+
+	public List<String> restoreIpAddresses(String s) {
+		List<String> result = new ArrayList<>();
+		if (s.length() < 4 || s.length() > 12) {
+			return result;
+		}
+		backtracking(s, "", result, 1);
+		return result;
+	}
+
+	private void backtracking(String s, String answer, List<String> result, int index) {
+
+		if (index == 4 && valid(s)) {
+			result.add(answer + s);
+			return;
+		}
+		for (int i = 1; i < Math.min(4, s.length()); i++) {
+			String substring = s.substring(0, i);
+			if (valid(substring)) {
+				backtracking(s.substring(i), answer + substring + ".", result, index + 1);
+			}
+		}
+	}
+
+	private boolean valid(String substring) {
+		if (substring.charAt(0) == '0') {
+			return "0".equals(substring);
+		}
+		return Integer.parseInt(substring) <= 255;
 	}
 }
