@@ -115,7 +115,7 @@ public class Sort {
 		for (int i = 0; i < numbers.length - 1; i++) {
 			int min = i;
 			for (int j = i + 1; j < numbers.length; j++) {
-				if (numbers[i] > numbers[j]) {
+				if (numbers[j] < numbers[min]) {
 					min = j;
 				}
 			}
