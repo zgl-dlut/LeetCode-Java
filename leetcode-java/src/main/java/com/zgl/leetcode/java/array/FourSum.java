@@ -9,6 +9,13 @@ import java.util.List;
  * @date 2018/12/28 下午3:56
  */
 public class FourSum {
+	public static void main(String[] args) {
+		FourSum mock = new FourSum();
+		int[] nums = {-3,-2,-1,0,0,1,2,3};
+		int target = 0;
+		System.out.println(mock.fourSum(nums, target));
+	}
+
 	/**
 	 * 18. 4Sum
 	 * Given an array nums of n integers and an integer target, are there elements a, b, c, and d in nums such that a + b + c + d = target? Find all unique quadruplets in the array which gives the sum of target.
@@ -28,7 +35,7 @@ public class FourSum {
 	 * [-2,  0, 0, 2]
 	 * ]
 	 */
-	public List<List<Integer>> fourSum(int[] nums, int target) {
+	public List<List<Integer>> fourSum1(int[] nums, int target) {
 		List<List<Integer>> result = new ArrayList<>();
 		if (nums.length < 4) {
 			return result;
@@ -72,10 +79,42 @@ public class FourSum {
 		return result;
 	}
 
-	public static void main(String[] args) {
-		FourSum mock=new FourSum();
-		int[] nums={1, 0, -1, 0, -2, 2};
-		int target=0;
-		System.out.println(mock.fourSum(nums,target));
+	public List<List<Integer>> fourSum(int[] nums, int target) {
+		List<List<Integer>> result = new ArrayList<>();
+		Arrays.sort(nums);
+		int length = nums.length;
+		for (int i = 0; i < length - 3; i++) {
+			if (i == 0 || (i > 0 && nums[i] != nums[i - 1])) {
+				for (int j = i + 1; j < length - 2; j++) {
+					if (j == i + 1 || (j > i + 1 && nums[j] != nums[j - 1])) {
+						int remain = target - nums[j] - nums[i];
+						int left = j + 1, right = length - 1;
+						while (left < right) {
+							if (nums[left] + nums[right] == remain) {
+								List<Integer> answer = new ArrayList<>();
+								answer.add(nums[i]);
+								answer.add(nums[j]);
+								answer.add(nums[left]);
+								answer.add(nums[right]);
+								result.add(answer);
+								while (left < right && nums[left] == nums[left + 1]) {
+									left++;
+								}
+								while (left < right && nums[right] == nums[right - 1]) {
+									right--;
+								}
+								left++;
+								right--;
+							} else if (nums[left] + nums[right] < remain) {
+								left++;
+							} else {
+								right--;
+							}
+						}
+					}
+				}
+			}
+		}
+		return result;
 	}
 }

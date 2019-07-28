@@ -30,15 +30,15 @@ public class KthLargestElement {
 		return nums[nums.length - k];
 	}
 
-	public int findKthLargest(int[] nums, int k) {
+	/*public int findKthLargest(int[] nums, int k) {
 		return selectQuickSort(nums, 0, nums.length - 1, k);
 	}
 
 	private int selectQuickSort(int[] nums, int left, int right, int k) {
 		int position = partition(nums, left, right);
-		/**
+		*//**
 		 * 第k大数字的下标是nums.length - k
-		 */
+		 *//*
 		if (position == nums.length - k) {
 			return nums[position];
 		} else if (position < nums.length - k) {
@@ -48,9 +48,14 @@ public class KthLargestElement {
 		}
 	}
 
-	/**
+	*/	public static void main(String[] args) {
+		int[] nums = {7,6,5,4,3,2,1};
+		System.out.println(new KthLargestElement().findKthLargest(nums, 2));
+	}
+
+/**
 	 * 返回值左边比他小,右边比他大
-	 */
+	 *//*
 	private int partition(int[] nums, int left, int right) {
 		int pivot = nums[left];
 		while (left < right) {
@@ -65,9 +70,36 @@ public class KthLargestElement {
 			nums[left] = pivot;
 		}
 		return left;
+	}*/
+
+	public int findKthLargest(int[] nums, int k) {
+		return quickSort(nums, k, 0, nums.length - 1);
 	}
-	public static void main(String[] args) {
-		int[] nums = {3,2,3,1,2,4,5,5,6};
-		System.out.println(new KthLargestElement().findKthLargest(nums, 4));
+
+	private int quickSort(int[] nums, int k, int left, int right) {
+		int pos = partition(nums, left, right);
+		if(pos == nums.length - k) {
+			return nums[nums.length - k];
+		}else if(pos < nums.length - k) {
+			return quickSort(nums, k, pos + 1, right);
+		}else {
+			return quickSort(nums, k, left, pos - 1);
+		}
+	}
+
+	private int partition(int[] nums, int left, int right) {
+		int pivot = nums[left];
+		while(left < right) {
+			while(left < right && nums[right] >= nums[left]) {
+				right--;
+			}
+			nums[left] = nums[right];
+			while(left < right && nums[left] <= nums[right]) {
+				left++;
+			}
+			nums[right] = nums[left];
+		}
+		nums[left] = pivot;
+		return left;
 	}
 }

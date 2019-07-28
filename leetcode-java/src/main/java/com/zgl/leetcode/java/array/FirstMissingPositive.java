@@ -58,6 +58,6 @@ public class FirstMissingPositive {
 		int[] nums = {3,4,-1,1};
 		int result = new FirstMissingPositive().firstMissingPositive(nums);
 		System.out.println(result);
-		System.out.println(FirstMissingPositive.i);
+		//System.out.println(FirstMissingPositive.i);
 	}
 }

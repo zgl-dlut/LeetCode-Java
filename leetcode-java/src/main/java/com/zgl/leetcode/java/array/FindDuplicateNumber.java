@@ -29,7 +29,7 @@ public class FindDuplicateNumber {
 	 */
 	//遍历数组，若数组中小于等于n / 2的数字个数超过n / 2，则可以确定[1, n /2]范围内一定有解，
 	//否则可以确定解落在(n / 2, n]范围内。
-	public int findDuplicate(int[] nums) {
+	public int findDuplicate1(int[] nums) {
 		int n = nums.length;
 		int left = 1, right = n - 1, count;
 		while (left <= right) {
@@ -47,6 +47,22 @@ public class FindDuplicateNumber {
 			}
 		}
 		return left;
+	}
+
+	//快慢指针-转换成链表存在环的问题
+	public int findDuplicate(int[] nums) {
+		int slow = nums[0];
+		int fast = nums[nums[0]];
+		while (slow != fast) {
+			slow = nums[slow];
+			fast = nums[nums[fast]];
+		}
+		fast = 0;
+		while (slow != fast) {
+			slow = nums[slow];
+			fast = nums[fast];
+		}
+		return slow;
 	}
 
 	public static void main(String[] args) {

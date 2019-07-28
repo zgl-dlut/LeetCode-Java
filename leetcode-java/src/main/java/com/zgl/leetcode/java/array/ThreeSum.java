@@ -37,6 +37,9 @@ public class ThreeSum {
 				continue;
 			}
 			while (start < end) {
+				if (nums[start] > sum / 2) {
+					break;
+				}
 				if (nums[start] + nums[end] == sum) {
 					List<Integer> temp = new ArrayList<>();
 					temp.add(nums[i]);
