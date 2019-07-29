@@ -5,6 +5,13 @@ package com.zgl.leetcode.java.array;
  * @date 2018/12/18 上午9:44
  */
 public class MedianTwoSortedArrays {
+	public static void main(String[] args) {
+		MedianTwoSortedArrays mock=new MedianTwoSortedArrays();
+		int[]nums1={1,2};
+		int[]nums2={3,4};
+		System.out.println(mock.findMedianSortedArrays(nums1,nums2));
+	}
+
 	/**
 	 * 4. Median of Two Sorted Arrays
 	 * There are two sorted arrays nums1 and nums2 of size m and n respectively.
@@ -26,7 +33,7 @@ public class MedianTwoSortedArrays {
 	 *
 	 * The median is (2 + 3)/2 = 2.5
 	 */
-	public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+	public double findMedianSortedArrays1(int[] nums1, int[] nums2) {
 		int m=nums1.length;
 		int n=nums2.length;
 		int total=m+n;
@@ -55,10 +62,33 @@ public class MedianTwoSortedArrays {
 		}
 	}
 
-	public static void main(String[] args) {
-		MedianTwoSortedArrays mock=new MedianTwoSortedArrays();
-		int[]nums1={1,3};
-		int[]nums2={};
-		System.out.println(mock.findMedianSortedArrays(nums1,nums2));
+	public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+		int n1 = nums1.length, n2 = nums2.length;
+		int length = n1 + n2;
+		int[] nums = new int[n1 + n2];
+		int a = 0, b = 0, start = 0;
+		while(a < n1 && b < n2) {
+			if(nums1[a] < nums2[b]) {
+				nums[start++] = nums1[a++];
+			}else {
+				nums[start++] = nums2[b++];
+			}
+		}
+		while(a < n1) {
+			nums[start++] = nums1[a++];
+		}
+		while(b < n2) {
+			nums[start++] = nums2[b++];
+		}
+		double result = 0.0;
+		if(length <= 1) {
+			return (double) nums[0];
+		}
+		if(length % 2 == 0) {
+			result = (double)((nums[length / 2] + nums[length / 2 - 1]) / 2.0);
+		}else {
+			result = (double) nums[length / 2];
+		}
+		return result;
 	}
 }

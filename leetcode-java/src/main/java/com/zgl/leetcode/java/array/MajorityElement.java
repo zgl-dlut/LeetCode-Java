@@ -36,7 +36,13 @@ public class MajorityElement {
 		return nums[nums.length / 2];
 	}
 
-	public int majorityElement(int[] nums){
+	public static void main(String[] args) {
+		int[] nums = {2,2};
+		System.out.println(new MajorityElement().majorityElement1(nums));
+		System.out.println(3 / 2);
+	}
+
+	public int majorityElement2(int[] nums){
 		Map<Integer, Integer> map = new HashMap<>();
 		for (int i = 0; i < nums.length; i++){
 			int count = map.getOrDefault(nums[i], 0);
@@ -48,8 +54,28 @@ public class MajorityElement {
 		}
 		return 0;
 	}
-	public static void main(String[] args) {
-		int[] nums = {2,2};
-		System.out.println(new MajorityElement().majorityElement1(nums));
+
+	/**
+	 * 选举法
+	 * @param nums
+	 * @return
+	 */
+	public int majorityElement(int[] nums) {
+		int n = nums.length;
+		int candidate = nums[0];
+		int count = 1;
+		for(int i = 1; i < n; i++) {
+			if(nums[i] == candidate) {
+				count++;
+			}else {
+				if(count > 0) {
+					count--;
+				}else {
+					candidate = nums[i];
+					//count = 1;
+				}
+			}
+		}
+		return candidate;
 	}
 }
