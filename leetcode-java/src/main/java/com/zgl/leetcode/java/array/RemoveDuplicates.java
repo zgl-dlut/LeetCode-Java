@@ -8,6 +8,7 @@ public class RemoveDuplicates {
 
 	public static void main(String[] args) {
 		int[] nums = {0,0,1,1,1,2,2,3,3,4};
+		System.out.println("多退" + 100.11);
 		System.out.println(new RemoveDuplicates().removeDuplicates(nums));
 	}
 
@@ -81,4 +82,5 @@ public class RemoveDuplicates {
 		}
 		return index + 1;
 	}
+
 }

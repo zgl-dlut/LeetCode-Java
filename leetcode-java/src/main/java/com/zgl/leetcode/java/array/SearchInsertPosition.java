@@ -1,5 +1,10 @@
 package com.zgl.leetcode.java.array;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author zgl
  * @date 2018/11/25 下午8:00
@@ -68,7 +73,7 @@ public class SearchInsertPosition {
 	 * Output: [-1,-1]
 	 */
 	public int[] searchRange(int[] nums, int target) {
-		int left=0,right=nums.length-1,mid;
+		/*int left=0,right=nums.length-1,mid;
 		int[]result={-1,-1};
 		while (left<=right){
 			mid=left+(right-left)/2;
@@ -89,6 +94,21 @@ public class SearchInsertPosition {
 			}else {
 				right=mid-1;
 			}
+		}
+		return result;*/
+		int n = nums.length;
+		Map<Integer, List<Integer>> countMap = new HashMap<>();
+		for(int i = 0; i < n; i++) {
+			if(!countMap.containsKey(nums[i])) {
+				countMap.put(nums[i], new ArrayList<>());
+			}
+			countMap.get(nums[i]).add(i);
+		}
+		int[] result = new int[]{-1, -1};
+		if(countMap.containsKey(target)) {
+			List<Integer> list = countMap.get(target);
+			result[0] = list.get(0);
+			result[1] = list.get(list.size() - 1);
 		}
 		return result;
 	}
