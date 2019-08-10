@@ -52,6 +52,7 @@ public class Combinations {
 		for (int i = start; i <= n; i++) {
 			answer.add(i);
 			helper(n, k - 1, i + 1, answer, result);
+			System.out.println(answer);
 			answer.remove(answer.size() - 1);
 		}
 	}

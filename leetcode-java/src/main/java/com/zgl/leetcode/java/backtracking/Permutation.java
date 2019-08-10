@@ -127,11 +127,36 @@ public class Permutation {
 	}
 
 	public static void main(String[] args) {
-		int[] nums = {1, 1, 2};
-		new Permutation().permuteUnique(nums);
+		int[] nums = {1, 2, 3};
+		/*new Permutation().permuteUnique(nums);
 		List<Integer> temp = Arrays.asList(1, 2, 3);
 		List<Integer> list = new ArrayList<>(temp);
 		list.add(0, 9);
-		System.out.println(list);
+		System.out.println(list);*/
+		new Permutation().permute3(nums);
+	}
+
+	public List<List<Integer>> permute3(int[] nums) {
+		List<List<Integer>> result = new ArrayList<>();
+		boolean[] used = new boolean[nums.length];
+		backtracking(nums, used, new ArrayList<>(), result);
+		return result;
+	}
+
+	private void backtracking(int[] nums, boolean[] used, List<Integer> answer, List<List<Integer>> result) {
+		if(answer.size() == nums.length) {
+			result.add(new ArrayList<>(answer));
+		}
+		for(int i = 0; i < nums.length; i++) {
+			if(!used[i]) {
+				used[i] = true;
+				answer.add(nums[i]);
+				System.out.println(answer);
+				backtracking(nums, used, answer, result);
+				used[i] = false;
+				answer.remove(answer.size() - 1);
+				System.out.println(answer);
+			}
+		}
 	}
 }

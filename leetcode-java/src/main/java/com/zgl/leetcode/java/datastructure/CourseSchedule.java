@@ -8,6 +8,17 @@ import java.util.*;
  */
 public class CourseSchedule {
 
+	//0->1, 0->2, 1->3, 2->3
+	public static void main(String[] args) {
+		int[][] prerequisites = {{0,1}};
+		System.out.println(new CourseSchedule().canFinish(2, prerequisites));
+		/*int[] res = new CourseSchedule().findOrder(4, prerequisites);
+		for (int i = 0; i < res.length; i++) {
+			System.out.print(res[i]);
+			System.out.print(" ");
+		}*/
+	}
+
 	/**
 	 * 207. Course Schedule
 	 * There are a total of n courses you have to take, labeled from 0 to n-1.
@@ -34,52 +45,49 @@ public class CourseSchedule {
 	 * The input prerequisites is a graph represented by a list of edges, not adjacency matrices. Read more about how a graph is represented.
 	 * You may assume that there are no duplicate edges in the input prerequisites.
 	 */
+	//int[][] prerequisites = {{1,0},{2,0},{3,1},{3,2}};
+	//0->1, 0->2, 1->3, 2->3
 	public boolean canFinish(int numCourses, int[][] prerequisites) {
-		//key为节点,value为与该节点相连边的节点
+		//存储每个节点的出度
 		Map<Integer, List<Integer>> graph = new HashMap<>();
-		//存储每个节点的入度,采用拓扑排序,每次删除入度为0的节点
-		int[] degree = new int[numCourses];
-		for (int i = 0; i < prerequisites.length; i++) {
-			int first = prerequisites[i][0];
-			int second = prerequisites[i][1];
-			if (!graph.containsKey(first)) {
+		//存储入度
+		int[] degrees = new int[numCourses];
+		for(int i = 0; i < prerequisites.length; i++) {
+			//first->second
+			int first = prerequisites[i][1];
+			int second = prerequisites[i][0];
+			if(!graph.containsKey(first)) {
 				graph.put(first, new ArrayList<>());
 			}
 			graph.get(first).add(second);
-			degree[second]++;
+			degrees[second]++;
 		}
 		Queue<Integer> queue = new LinkedList<>();
-		int count = 0;
-		for (int i = 0; i< numCourses; i++) {
-			if (degree[i] == 0) {
+		/*for(int i : degrees) {
+			if(i == 0) {
+				queue.offer(i);
+			}
+		}*/
+		for (int i = 0; i < numCourses; i++) {
+			if(degrees[i] == 0) {
 				queue.offer(i);
 			}
 		}
-		while (!queue.isEmpty()) {
-			int degreeVal = queue.poll();
+		int count = 0;
+		while(!queue.isEmpty()) {
+			int degree = queue.poll();
 			count++;
-			if (!graph.containsKey(degreeVal)) {
-				continue;
-			}
-			//所有相连边的节点入度减一
-			for (Integer integer : graph.get(degreeVal)) {
-				degree[integer]--;
-				if (degree[integer] == 0) {
-					queue.offer(integer);
+			if(graph.containsKey(degree)) {
+				List<Integer> out = graph.get(degree);
+				for(int i : out) {
+					degrees[i]--;
+					if(degrees[i] == 0) {
+						queue.offer(i);
+					}
 				}
 			}
-
 		}
 		return count == numCourses;
-	}
-
-	public static void main(String[] args) {
-		int[][] prerequisites = {{0,1},{1,0}};
-		int[] res = new CourseSchedule().findOrder(2, prerequisites);
-		for (int i = 0; i < res.length; i++) {
-			System.out.print(res[i]);
-			System.out.print(" ");
-		}
 	}
 
 	/**

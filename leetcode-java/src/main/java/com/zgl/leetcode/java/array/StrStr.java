@@ -20,7 +20,14 @@ package com.zgl.leetcode.java.array;
  * Output: -1
  */
 public class StrStr {
-	public int strStr(String haystack, String needle) {
+	public static void main(String[] args) {
+		String haystack = "hello";
+		String needle = "llo";
+		System.out.println(new StrStr().strStr1(haystack,needle));
+		System.out.println(haystack.substring(0,2));
+	}
+
+	public int strStr1(String haystack, String needle) {
 		int i, j;
 		if (haystack.length() < needle.length()) {
 			return -1;
@@ -38,9 +45,17 @@ public class StrStr {
 		}
 	}
 
-	public static void main(String[] args) {
-		String haystack = "hello";
-		String needle = "";
-		System.out.println(new StrStr().strStr(haystack,needle));
+	public int strStr(String haystack, String needle) {
+		int n1 = haystack.length(), n2 = needle.length();
+		if(n1 < n2) {
+			return -1;
+		}
+		int dist = n1 - n2;
+		for(int i = 0; i <= dist; i++) {
+			if (haystack.substring(i, i + n2).equals(needle)) {
+				return i;
+			}
+		}
+		return -1;
 	}
 }

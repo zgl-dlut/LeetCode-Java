@@ -1,5 +1,6 @@
 package com.zgl.leetcode.java.backtracking;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -82,6 +83,12 @@ public class WordSearch {
 	 * Output: ["eat","oath"]
 	 */
 	public List<String> findWords(char[][] board, String[] words) {
-		return null;
+		List<String> result = new ArrayList<>();
+		for(int i = 0; i < words.length; i++) {
+			if(exist(board, words[i])) {
+				result.add(words[i]);
+			}
+		}
+		return result;
 	}
 }

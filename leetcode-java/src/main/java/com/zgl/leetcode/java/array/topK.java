@@ -11,6 +11,11 @@ import java.util.Map;
  */
 public class topK {
 
+	public static void main(String[] args) {
+		int[] nums = {1,2,2,2,3,3};
+		System.out.println(new topK().topKFrequent1(nums, 2));
+	}
+
 	/**
 	 * 347. Top K Frequent Elements
 	 * Given a non-empty array of integers, return the k most frequent elements.
@@ -28,7 +33,7 @@ public class topK {
 	 * You may assume k is always valid, 1 ≤ k ≤ number of unique elements.
 	 * Your algorithm's time complexity must be better than O(n log n), where n is the array's size.
 	 */
-	public List<Integer> topKFrequent(int[] nums, int k) {
+	public List<Integer> topKFrequent1(int[] nums, int k) {
 
 		int length = nums.length;
 		Map<Integer, Integer> map = new HashMap<>();
@@ -50,11 +55,6 @@ public class topK {
 			}
 		}
 		return result;
-	}
-
-	public static void main(String[] args) {
-		int[] nums = {1};
-		System.out.println(new topK().topKFrequent(nums, 1));
 	}
 
 }

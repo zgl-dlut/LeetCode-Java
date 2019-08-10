@@ -39,13 +39,9 @@ public class Subsets {
 		return result;
 	}
 
-	private void backtracking(int[] nums, int start, List<Integer> answer, List<List<Integer>> result) {
-		result.add(new ArrayList<>(answer));
-		for (int i = start; i < nums.length; i++) {
-			answer.add(nums[i]);
-			backtracking(nums, i + 1, answer, result);
-			answer.remove(answer.size() - 1);
-		}
+	public static void main(String[] args) {
+		int[] nums = {1,2,3};
+		new Subsets().subsets(nums);
 	}
 	/**
 	 * 90. Subsets II
@@ -84,6 +80,17 @@ public class Subsets {
 			answer.add(nums[i]);
 			helper(nums, answer, result, i + 1);
 			answer.remove(answer.size() - 1);
+		}
+	}
+
+	private void backtracking(int[] nums, int start, List<Integer> answer, List<List<Integer>> result) {
+		result.add(new ArrayList<>(answer));
+		System.out.println(answer);
+		for (int i = start; i < nums.length; i++) {
+			answer.add(nums[i]);
+			backtracking(nums, i + 1, answer, result);
+			answer.remove(answer.size() - 1);
+			System.out.println(answer);
 		}
 	}
 }

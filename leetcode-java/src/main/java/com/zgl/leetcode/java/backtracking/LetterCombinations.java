@@ -46,7 +46,7 @@ public class LetterCombinations {
 	}
 
 	public static void main(String[] args) {
-		//new LetterCombinations().letterCombinations("234");
-		System.out.println();
+		List<String> res = new LetterCombinations().letterCombinations("");
+		System.out.println(res);
 	}
 }
