@@ -130,7 +130,7 @@ public class BuyAndSellStock {
 
 
 	public static void main(String[] args) {
-		int[] prices = {1, 2};
+		int[] prices = {3,3,5,0,0,3,1,4};
 		System.out.println(new BuyAndSellStock().maxProfit(prices));
 	}
 }

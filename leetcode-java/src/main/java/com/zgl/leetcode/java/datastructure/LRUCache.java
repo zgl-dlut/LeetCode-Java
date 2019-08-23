@@ -6,7 +6,7 @@ import java.util.*;
  * @author zgl
  * @date 2019/5/17 下午2:34
  */
-public class LRUCache{
+public class LRUCache extends LinkedHashMap<Integer, Integer> {
 
 	/**
 	 * 146. LRU Cache
@@ -24,8 +24,14 @@ public class LRUCache{
 	 * Follow up:
 	 * Could you do both operations in O(1) time complexity?
 	 */
+	private int capacity;
 
-	private Deque<Node> linkedList = new ArrayDeque<>();
+	public LRUCache(int capacity) {
+		super(capacity, 1, true);
+		this.capacity = capacity;
+	}
+
+	/*private Deque<Node> linkedList = new ArrayDeque<>();
 
 	private Map<Integer, Node> hashMap = new HashMap<>();
 
@@ -74,7 +80,7 @@ public class LRUCache{
 			this.key = key;
 			this.value = value;
 		}
-	}
+	}*/
 	public static void main(String[] args) {
 		LRUCache cache = new LRUCache(2);
 		cache.put(1, 1);
@@ -86,6 +92,19 @@ public class LRUCache{
 		cache.get(1);       // returns -1 (not found)
 		cache.get(3);       // returns 3
 		cache.get(4);       // returns 4
+	}
+
+	@Override
+	protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {
+		return size() > capacity;
+	}
+
+	public int get(int key) {
+		return super.getOrDefault(key, -1);
+	}
+
+	public void put(int key, int value) {
+		super.put(key, value);
 	}
 
 }

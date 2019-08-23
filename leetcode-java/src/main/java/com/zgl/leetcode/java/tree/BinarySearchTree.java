@@ -2,10 +2,7 @@ package com.zgl.leetcode.java.tree;
 
 import com.sun.source.tree.Tree;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * @author zgl
@@ -112,7 +109,7 @@ public class BinarySearchTree {
 		List<Integer> inOrder = new ArrayList<>();
 		List<TreeNode> nodeList = new ArrayList<>();
 		inOrder(root, inOrder, nodeList);
-		inOrder.sort((a, b) -> a - b);
+		inOrder.sort(Comparator.comparingInt(a -> a));
 		for (int i = 0; i < nodeList.size(); i++){
 			nodeList.get(i).val = inOrder.get(i);
 		}

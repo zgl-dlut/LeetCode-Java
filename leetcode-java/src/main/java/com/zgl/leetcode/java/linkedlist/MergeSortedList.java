@@ -5,6 +5,7 @@ package com.zgl.leetcode.java.linkedlist;
  * @date 2018/11/25 下午7:46
  */
 
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**
@@ -67,7 +68,7 @@ public class MergeSortedList {
 		if (lists.length == 1) {
 			return lists[0];
 		}
-		PriorityQueue<ListNode> minHeap = new PriorityQueue<>((listNode1, listNode2) -> listNode1.val - listNode2.val);
+		PriorityQueue<ListNode> minHeap = new PriorityQueue<>(Comparator.comparingInt(listNode -> listNode.val));
 		for (int i = 0; i < lists.length; i++) {
 			if (lists[i] != null) {
 				minHeap.offer(lists[i]);
