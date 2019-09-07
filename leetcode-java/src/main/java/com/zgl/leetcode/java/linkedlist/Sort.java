@@ -90,4 +90,38 @@ public class Sort {
 		}
 		return result.next;
 	}
+
+	/**
+	 * 插入排序
+	 * @param head
+	 * @return
+	 */
+	public ListNode insertSort(ListNode head) {
+		if (head == null || head.next == null) {
+			return head;
+		}
+		ListNode newHead = new ListNode(0);
+		newHead.next = head;
+		ListNode pre = head, cur = head.next;
+		while (cur != null) {
+			if (cur.val < pre.val) {
+				pre.next = cur.next;
+				//从头部判断
+				ListNode temp1 = newHead;
+				ListNode temp2 = newHead.next;
+				while (cur.val >= temp2.val) {
+					temp1 = temp2;
+					temp2 = temp2.next;
+				}
+
+				temp1.next = cur;
+				cur.next = temp2;
+				cur = pre.next;
+			} else {
+				pre = cur;
+				cur = cur.next;
+			}
+		}
+		return newHead.next;
+	}
 }

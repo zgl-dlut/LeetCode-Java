@@ -158,18 +158,36 @@ public class Sort {
 		return left;
 	}
 
-	/**
-	 * 归并排序
-	 */
-	public int[] mergeSort(int[] numbers, int left, int right) {
-		int[] temp = new int[numbers.length];
-		if (left < right) {
-			int middle = (left + right) / 2;
-			mergeSort(numbers, left, middle);
-			mergeSort(numbers, middle + 1, right);
-			mergePartition(numbers, left, middle, right, temp);
+	public static void main(String[] args) {
+		Sort mock = new Sort();
+		int[] numbers = {49, 38, 65, 97, 76, 13, 27, 49};
+		//mock.quickSort(numbers, 0, 7);
+		//System.out.println("传统冒泡排序");
+		//mock.bubbleSort(numbers);
+		//System.out.println("改进冒泡排序");
+		//mock.bubbleSortAdvanced(numbers);
+		int[] res = mock.mergeSort(numbers,0,7);
+		for (int i : res) {
+			System.out.print(i + " ");
 		}
-		return numbers;
+		//mock.heapSort(numbers);
+		//mock.directInsertSort(numbers);
+		//mock.binaryInsertSort(numbers);
+		Map<Integer, Integer> orderMap = new HashMap<>();
+		orderMap.put(49, 1);
+		orderMap.put(38, 2);
+		orderMap.put(65, 3);
+		orderMap.put(97, 4);
+		List<Integer> list = new ArrayList<>();
+		list.add(49);
+		list.add(38);
+		list.add(65);
+		list.add(97);
+		/*Collections.sort(list, (Integer o1, Integer o2)-> o2-o1);
+		list.sort((Integer o1, Integer o2)-> o2-o1);*/
+
+		list.sort(Comparator.comparingInt(o1 -> orderMap.get(o1)));
+		//list.stream().forEach(i -> System.out.println(i));
 	}
 
 	/**
@@ -203,6 +221,19 @@ public class Sort {
 		System.out.println();
 	}
 
+	/**
+	 * 归并排序
+	 */
+	public int[] mergeSort(int[] numbers, int left, int right) {
+		int[] temp = new int[numbers.length];
+		if (left < right) {
+			int middle = (left + right) / 2;
+			mergeSort(numbers, left, middle);
+			mergeSort(numbers, middle + 1, right);
+			mergeTwoSortedArray(numbers, left, middle, right, temp);
+		}
+		return numbers;
+	}
 	/**
 	 * 将元素array[k]自下往上逐步调整树形结构
 	 */
@@ -265,32 +296,20 @@ public class Sort {
 		return array;
 	}
 
-	public static void main(String[] args) {
-		Sort mock = new Sort();
-		int[] numbers = {49, 38, 65, 97, 76, 13, 27, 49};
-		mock.quickSort(numbers, 0, 7);
-		//System.out.println("传统冒泡排序");
-		//mock.bubbleSort(numbers);
-		//System.out.println("改进冒泡排序");
-		//mock.bubbleSortAdvanced(numbers);
-		//mock.mergeSort(numbers,0,7);
-		//mock.heapSort(numbers);
-		//mock.directInsertSort(numbers);
-		mock.binaryInsertSort(numbers);
-		Map<Integer, Integer> orderMap = new HashMap<>();
-		orderMap.put(49, 1);
-		orderMap.put(38, 2);
-		orderMap.put(65, 3);
-		orderMap.put(97, 4);
-		List<Integer> list = new ArrayList<>();
-		list.add(49);
-		list.add(38);
-		list.add(65);
-		list.add(97);
-		/*Collections.sort(list, (Integer o1, Integer o2)-> o2-o1);
-		list.sort((Integer o1, Integer o2)-> o2-o1);*/
-
-		list.sort(Comparator.comparingInt(o1 -> orderMap.get(o1)));
-		//list.stream().forEach(i -> System.out.println(i));
+	private void mergeTwoSortedArray(int[] nums, int left, int middle, int right, int[] temp) {
+		int i = left, j = middle + 1, tag = 0;
+		while (i <= middle && j <= right) {
+			temp[tag++] = (nums[i] <= nums[j]) ? nums[i++] : nums[j++];
+		}
+		while (i <= middle) {
+			temp[tag++] = nums[i++];
+		}
+		while (j <= right) {
+			temp[tag++] = nums[j++];
+		}
+		tag = 0;
+		while (left <= right) {
+			nums[left++] = temp[tag++];
+		}
 	}
 }
