@@ -17,7 +17,16 @@ public class ListNodeUtil {
 		listNode1.next=listNode2;
 		listNode2.next=listNode3;
 		listNode3.next=listNode4;
-		listNode4.next=listNode5;
+		//listNode4.next=listNode5;
+		return listNode1;
+	}
+
+	public static ListNode getHead1() {
+		ListNode listNode1=new ListNode(5);
+		ListNode listNode2=new ListNode(6);
+		ListNode listNode3=new ListNode(4);
+		listNode1.next=listNode2;
+		listNode2.next=listNode3;
 		return listNode1;
 	}
 }
