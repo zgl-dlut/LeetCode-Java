@@ -62,11 +62,16 @@ public class Sort {
 	public int[] bubbleSort(int[] numbers) {
 		int length = numbers.length;
 		int i, j;
+		boolean flag = false;
 		for (i = 0; i < length - 1; i++) {
 			for (j = 0; j < length - 1 - i; j++) {
 				if (numbers[j] > numbers[j + 1]) {
 					swap(numbers, j, j + 1);
+					flag = true;
 				}
+			}
+			if (!flag) {
+				break;
 			}
 			for (int k : numbers) {
 				System.out.print(k + " ");

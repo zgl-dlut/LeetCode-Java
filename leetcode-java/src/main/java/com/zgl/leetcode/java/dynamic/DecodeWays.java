@@ -6,7 +6,7 @@ package com.zgl.leetcode.java.dynamic;
  */
 public class DecodeWays {
 	public static void main(String[] args) {
-		String s = "200";
+		String s = "0200";
 		System.out.println(new DecodeWays().numDecodings(s));
 	}
 
@@ -52,4 +52,5 @@ public class DecodeWays {
 		}
 		return dp[length];
 	}
+
 }

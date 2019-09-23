@@ -101,4 +101,8 @@ public class UniqueBinarySearchTrees {
 		}
 		return result;
 	}
+
+	public static void main(String[] args) {
+		new UniqueBinarySearchTrees().generateTrees(3);
+	}
 }
