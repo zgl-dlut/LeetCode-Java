@@ -289,9 +289,7 @@ public class Sort {
 	public int[] heapSort(int[] array){
 		array = buildMaxHeap(array);
 		for(int i = array.length - 1; i > 0; i--){
-			int temp = array[0];
-			array[0] = array[i];
-			array[i] = temp;
+			swap(array, 0, i);
 			adjustDownToUp(array, 0, i);
 			for (int num : array) {
 				System.out.print(num + " ");

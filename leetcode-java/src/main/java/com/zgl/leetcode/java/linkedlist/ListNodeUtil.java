@@ -17,7 +17,7 @@ public class ListNodeUtil {
 		listNode1.next=listNode2;
 		listNode2.next=listNode3;
 		listNode3.next=listNode4;
-		//listNode4.next=listNode5;
+		listNode4.next=listNode5;
 		return listNode1;
 	}
 

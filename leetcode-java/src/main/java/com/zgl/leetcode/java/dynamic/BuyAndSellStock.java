@@ -1,5 +1,11 @@
 package com.zgl.leetcode.java.dynamic;
 
+import java.time.LocalDate;
+import java.time.ZoneOffset;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
  * @author zgl
  * @date 2019/5/15 下午3:44
@@ -132,5 +138,9 @@ public class BuyAndSellStock {
 	public static void main(String[] args) {
 		int[] prices = {3,3,5,0,0,3,1,4};
 		System.out.println(new BuyAndSellStock().maxProfit(prices));
+		Map<String, String> map = new HashMap<>();
+		for (int i = 0; i < 10000; i++) {
+			new Thread(() -> map.put(UUID.randomUUID().toString(), " "), "zgl").start();
+		}
 	}
 }
