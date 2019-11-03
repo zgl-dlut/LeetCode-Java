@@ -76,13 +76,72 @@ public class Palidromic {
 		}
 		return s.substring(maxTag,dp[maxTag]+maxTag);
 	}
+	private String result = "";
 
 	/**
 	 * substring[a,b)左闭右开
 	 */
 	public static void main(String[] args) {
-		String s="babad";
+		String s="a";
+		System.out.println(s.substring(0, 1));
 		Palidromic mock=new Palidromic();
-		System.out.println(mock.longestPalindrome(s));
+		System.out.println(mock.longestPalindrome1(s));
+	}
+
+	public String longestPalindrome1(String s) {
+		if (s.length() < 2) {
+			return result;
+		}
+		for (int i = 0; i < s.length(); i++) {
+			helper(s, i, i);
+			helper(s, i, i + 1);
+		}
+		return result;
+	}
+
+	private void helper(String s, int left, int right) {
+		while(left >= 0 && right < s.length()) {
+			if (s.charAt(left) != s.charAt(right)) {
+				break;
+			} else {
+				left--;
+				right++;
+			}
+		}
+		result = result.length() >= s.substring(left + 1, right).length() ? result : s.substring(left + 1, right);
+	}
+
+	/**
+	 * 516. Longest Palindromic Subsequence
+	 * Given a string s, find the longest palindromic subsequence's length in s. You may assume that the maximum length of s is 1000.
+	 *
+	 * Example 1:
+	 * Input:
+	 *
+	 * "bbbab"
+	 * Output:
+	 * 4
+	 * One possible longest palindromic subsequence is "bbbb".
+	 * Example 2:
+	 * Input:
+	 *
+	 * "cbbd"
+	 * Output:
+	 * 2
+	 */
+	public int longestPalindromeSubseq(String s) {
+		int n = s.length();
+		int[][] dp = new int[n][n];
+		for (int i = n - 1; i >= 0; i--) {
+			dp[i][i] = 1;
+			for (int j = i + 1; j < n; j++) {
+				if (s.charAt(i) == s.charAt(j)) {
+					dp[i][j] = dp[i + 1][j - 1] + 2;
+				} else {
+					dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
+				}
+			}
+		}
+		return dp[0][n - 1];
 	}
 }
