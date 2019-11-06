@@ -7,11 +7,6 @@ import java.util.Arrays;
  * @date 2019/11/4 下午8:20
  */
 public class CoinChange {
-	public static void main(String[] args) {
-		int[] coins = {5,2,1};
-		System.out.println(new CoinChange().coinChange(coins, 11));
-	}
-
 	/**
 	 * 322. Coin Change
 	 * You are given coins of different denominations and a total amount of money amount.
@@ -58,5 +53,22 @@ public class CoinChange {
 			}
 		}
 		return dp[amount] > amount ? -1 : dp[amount];
+	}
+
+	public static void main(String[] args) {
+		int[] coins = {5,2,1};
+		System.out.println(new CoinChange().coinChangeMax(coins, 7));
+	}
+
+	public int coinChangeMax(int[] coins, int amount) {
+		int[] dp = new int[amount + 1];
+		Arrays.fill(dp, -amount);
+		dp[0] = 0;
+		for (int coin : coins) {
+			for (int i = coin; i <= amount; i++) {
+				dp[i] = Math.max(dp[i], dp[i - coin] + 1);
+			}
+		}
+		return dp[amount] < 0 ? -1 : dp[amount];
 	}
 }
