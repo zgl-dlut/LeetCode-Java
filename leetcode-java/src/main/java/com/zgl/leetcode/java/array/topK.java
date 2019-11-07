@@ -12,7 +12,7 @@ import java.util.Map;
 public class topK {
 
 	public static void main(String[] args) {
-		int[] nums = {1,2,2,2,3,3};
+		int[] nums = {1,2,2,2,3,3,3};
 		System.out.println(new topK().topKFrequent1(nums, 2));
 	}
 
@@ -41,12 +41,18 @@ public class topK {
 			map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
 		}
 		List<Integer>[] array = new ArrayList[length + 1];
-		for (int key : map.keySet()) {
+		/*for (int key : map.keySet()) {
 			int count = map.get(key);
 			if (array[count] == null) {
 				array[count] = new ArrayList<>();
 			}
 			array[count].add(key);
+		}*/
+		for(Map.Entry entry : map.entrySet()) {
+			if (array[(Integer)entry.getValue()] == null) {
+				array[(Integer)entry.getValue()] = new ArrayList<>();
+			}
+			array[(Integer)entry.getValue()].add((Integer)entry.getKey());
 		}
 		List<Integer> result = new ArrayList<>();
 		for (int i = length; i >= 0 && result.size() < k; i--) {
