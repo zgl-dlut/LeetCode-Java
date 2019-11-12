@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class PartitionEqualSubsetSum {
 	public static void main(String[] args) {
 		int[] nums = {1,5,11,5};
-		new PartitionEqualSubsetSum().canPartition(nums);
+		new PartitionEqualSubsetSum().canPartition1(nums);
 	}
 
 	/**

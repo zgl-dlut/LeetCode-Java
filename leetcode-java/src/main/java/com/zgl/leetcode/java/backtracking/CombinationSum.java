@@ -158,7 +158,7 @@ public class CombinationSum {
 
 
 	public static void main(String[] args) {
-		int[] candidates = {2,5,2,1,2};
-		System.out.println(new CombinationSum().combinationSum3(3, 9));
+		int[] candidates = {2,3,5};
+		System.out.println(new CombinationSum().combinationSum2(candidates, 8));
 	}
 }
