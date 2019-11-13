@@ -33,18 +33,20 @@ public class MinStack {
 
 	private int min = Integer.MAX_VALUE;
 
+	private MinStack1 minStack1 = new MinStack1();
 
 	public MinStack() {
 
 	}
 
 	public void push(int x) {
-		stack.offerFirst(x);
-		min = Math.min(min, x);
+		/*stack.offerFirst(x);
+		min = Math.min(min, x);*/
+		minStack1.push(x);
 	}
 
 	public void pop() {
-		int top = stack.getFirst();
+		/*int top = stack.getFirst();
 		stack.pollFirst();
 		if (top == min){
 			int newMin = Integer.MAX_VALUE;
@@ -52,17 +54,57 @@ public class MinStack {
 				newMin = Math.min(newMin, stack.get(i));
 			}
 			min = newMin;
-		}
+		}*/
+		minStack1.pop();
 	}
 
 	public int top() {
-		return stack.getFirst();
+		/*return stack.getFirst();*/
+		return minStack1.top();
 	}
 
 	public int getMin() {
-		return min;
+		/*return min;*/
+		return minStack1.getMin();
 	}
 
+	class MinStack1 {
+
+		private int[] minStack;
+		private int defaultLength = 10;
+		private int elementCount = 0;
+		private int min = Integer.MAX_VALUE;
+		public MinStack1() {
+			minStack = new int[defaultLength];
+		}
+
+		public void push(int x) {
+			if (elementCount + 1 > minStack.length) {
+				minStack = Arrays.copyOf(minStack, 2 * minStack.length);
+			}
+			minStack[elementCount++] = x;
+			min = Math.min(min, x);
+		}
+
+		public void pop() {
+			int top = minStack[elementCount - 1];
+			elementCount--;
+			if (top == min) {
+				min = Integer.MAX_VALUE;
+				for (int i = 0; i < elementCount; i++) {
+					min = Math.min(min, minStack[i]);
+				}
+			}
+		}
+
+		public int top() {
+			return minStack[elementCount - 1];
+		}
+
+		public int getMin() {
+			return min;
+		}
+	}
 	public static void main(String[] args) {
 		MinStack minStack = new MinStack();
 		minStack.push(-2);
