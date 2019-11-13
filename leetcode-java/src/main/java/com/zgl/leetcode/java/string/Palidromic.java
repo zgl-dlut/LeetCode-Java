@@ -1,5 +1,8 @@
 package com.zgl.leetcode.java.string;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author zgl
  * @date 2018/12/11 下午3:39
@@ -78,15 +81,7 @@ public class Palidromic {
 	}
 	private String result = "";
 
-	/**
-	 * substring[a,b)左闭右开
-	 */
-	public static void main(String[] args) {
-		String s="a";
-		System.out.println(s.substring(0, 1));
-		Palidromic mock=new Palidromic();
-		System.out.println(mock.longestPalindrome1(s));
-	}
+
 
 	public String longestPalindrome1(String s) {
 		if (s.length() < 2) {
@@ -143,5 +138,126 @@ public class Palidromic {
 			}
 		}
 		return dp[0][n - 1];
+	}
+
+	/**
+	 * substring[a,b)左闭右开
+	 */
+	public static void main(String[] args) {
+		String s="abcbc";
+		Palidromic mock=new Palidromic();
+		System.out.println(mock.countSubstrings(s));
+	}
+
+	/**
+	 * 647. Palindromic Substrings
+	 * Given a string, your task is to count how many palindromic substrings in this string.
+	 *
+	 * The substrings with different start indexes or end indexes are counted as different substrings even they consist of same characters.
+	 *
+	 * Example 1:
+	 *
+	 * Input: "abc"
+	 * Output: 3
+	 * Explanation: Three palindromic strings: "a", "b", "c".
+	 *
+	 *
+	 * Example 2:
+	 *
+	 * Input: "aaa"
+	 * Output: 6
+	 * Explanation: Six palindromic strings: "a", "a", "a", "aa", "aa", "aaa".
+	 */
+	public int countSubstrings1(String s) {
+		int n = s.length();
+		if (n == 0) {
+			return 0;
+		}
+		if (n == 1) {
+			return 1;
+		}
+		int[] dp = new int[n];
+		dp[0] = 1;
+		for (int i = 1; i < n; i++) {
+			dp[i] = dp[i - 1];
+			for (int j = 0; j <= i; j++) {
+				dp[i] += isPalidromic(s, j, i) ? 1 : 0;
+			}
+		}
+		return dp[n - 1];
+	}
+
+	//dp
+	public int countSubstrings2(String s) {
+		int n = s.length();
+		if (n == 0) {
+			return 0;
+		}
+		if (n == 1) {
+			return 1;
+		}
+		int result = 1;
+		for (int i = 1; i < n; i++) {
+			for (int j = 0; j <= i; j++) {
+				result += isPalidromic(s, j, i) ? 1 : 0;
+			}
+		}
+		return result;
+	}
+
+	//中心扩展
+	public int countSubstrings(String s) {
+		int n = s.length();
+		if (n == 0) {
+			return 0;
+		}
+		if (n == 1) {
+			return 1;
+		}
+		int result = 0;
+		for (int i = 0; i < n; i++) {
+			int left = i, right = i;
+			while (left >= 0 && right < n && s.charAt(left) == s.charAt(right)) {
+				left--;
+				right++;
+				result++;
+			}
+			left = i;
+			right = i + 1;
+			while (left >= 0 && right < n && s.charAt(left) == s.charAt(right)) {
+				left--;
+				right++;
+				result++;
+			}
+		}
+		return result;
+	}
+
+	private boolean isPalidromic(String s, int left, int right) {
+		while(left < right) {
+			if (s.charAt(left) == s.charAt(right)) {
+				left++;
+				right--;
+			} else {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean isPalindromic(String substring) {
+		if (substring.length() == 0) {
+			return false;
+		}
+		int left = 0, right = substring.length() - 1;
+		while (left < right) {
+			if (substring.charAt(left) == substring.charAt(right)) {
+				left++;
+				right--;
+			} else {
+				return false;
+			}
+		}
+		return true;
 	}
 }
