@@ -36,7 +36,6 @@ public class MinStack {
 	private MinStack1 minStack1 = new MinStack1();
 
 	public MinStack() {
-
 	}
 
 	public void push(int x) {
