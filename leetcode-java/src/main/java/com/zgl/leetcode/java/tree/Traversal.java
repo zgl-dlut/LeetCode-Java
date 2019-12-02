@@ -222,4 +222,10 @@ public class Traversal {
 		Collections.reverse(result);
 		return result;
 	}
+
+	public static void main(String[] args) {
+		Integer[] nums = {3,9,20,null,null,15,7};
+		TreeNode treeNode = TreeNodeUtil.createBinaryTreeByArray(nums, 0);
+		System.out.println(new Traversal().levelOrderBottom(treeNode));
+	}
 }
