@@ -22,8 +22,8 @@ public class TreeNodeUtil {
 	}
 
 	public static TreeNode createBinaryTreeByArray(Integer[] nums, int index) {
-		TreeNode root = null;
 		if (index < nums.length) {
+			TreeNode root;
 			Integer value = nums[index];
 			if (null == value) {
 				return null;
@@ -33,6 +33,6 @@ public class TreeNodeUtil {
 			root.right = createBinaryTreeByArray(nums, 2 * index + 2);
 			return root;
 		}
-		return root;
+		return null;
 	}
 }
