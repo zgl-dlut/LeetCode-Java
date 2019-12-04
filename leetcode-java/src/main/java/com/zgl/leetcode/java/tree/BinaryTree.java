@@ -10,17 +10,10 @@ import java.util.Stack;
  */
 public class BinaryTree {
 
-	/**
-	 * 二叉树高度
-	 */
-	public int height(TreeNode root) {
-		if (root == null) {
-			return 0;
-		} else {
-			int left = height(root.left);
-			int right = height(root.right);
-			return (left < right) ? (right + 1) : (left + 1);
-		}
+	public static void main(String[] args) {
+		Integer[] nums = {0,1,2,3,4,5,6,null,8,null,null,7};
+		TreeNode root = TreeNodeUtil.createBinaryTreeByArray(nums, 0);
+		new BinaryTree().postOrder1(root);
 	}
 
 	public int maxDepth(TreeNode root) {
@@ -86,11 +79,16 @@ public class BinaryTree {
 	}
 
 	/**
-	 * 访问某个节点
+	 * 二叉树高度
 	 */
-	public void visit(TreeNode element) {
-		System.out.println(element.val);
-		System.out.println("  ");
+	public int height(TreeNode root) {
+		if (root == null) {
+			return 0;
+		} else {
+			int left = height(root.left);
+			int right = height(root.right);
+			return 1 + Math.max(left, right);
+		}
 	}
 
 	/**
@@ -104,18 +102,12 @@ public class BinaryTree {
 		}
 	}
 
-	public void preOrder1(TreeNode root){
-		Stack<TreeNode> stack=new Stack<>();
-		while(root!=null||!stack.empty()){
-			while (root!=null){
-				visit(root);
-				stack.push(root);
-				root=root.left;
-			}if(!stack.empty()){
-				TreeNode top=stack.pop();
-				root=top.right;
-			}
-		}
+	/**
+	 * 访问某个节点
+	 */
+	public void visit(TreeNode element) {
+		System.out.print(element.val);
+		System.out.print("  ");
 	}
 
 	/**
@@ -129,19 +121,21 @@ public class BinaryTree {
 		}
 	}
 
-	public void inOrder1(TreeNode root){
-		Stack<TreeNode> stack=new Stack<>();
-		while(root!=null||!stack.empty()){
-			while (root!=null){
+	public void preOrder1(TreeNode root) {
+		Stack<TreeNode> stack = new Stack<>();
+		while (root != null || !stack.empty()) {
+			while (root != null) {
+				visit(root);
 				stack.push(root);
-				root=root.left;
-			}if (!stack.empty()){
-				TreeNode top=stack.pop();
-				visit(top);
-				root=root.right;
+				root = root.left;
+			}
+			if (!stack.empty()) {
+				TreeNode top = stack.pop();
+				root = top.right;
 			}
 		}
 	}
+
 	/**
 	 * 后序递归遍历
 	 */
@@ -152,11 +146,27 @@ public class BinaryTree {
 			visit(root);
 		}
 	}
-	public void postOrder1(TreeNode root){
-		Stack<TreeNode>stack1=new Stack<>();
-		Stack<TreeNode>stack2=new Stack<>();
+
+	public void inOrder1(TreeNode root) {
+		Stack<TreeNode> stack = new Stack<>();
+		while (root != null || !stack.empty()) {
+			while (root != null) {
+				stack.push(root);
+				root = root.left;
+			}
+			if (!stack.empty()) {
+				TreeNode top = stack.pop();
+				visit(top);
+				root = root.right;
+			}
+		}
+	}
+
+	public void postOrder1(TreeNode root) {
+		Stack<TreeNode> stack1 = new Stack<>();
+		Stack<TreeNode> stack2 = new Stack<>();
 		stack1.push(root);
-		while (!stack1.empty()){
+		while (!stack1.empty()) {
 			TreeNode top = stack1.pop();
 			/**
 			 * s2根 右 左
@@ -165,40 +175,41 @@ public class BinaryTree {
 			/**
 			 * s1左节点 右节点
 			 */
-			if (top.left != null){
+			if (top.left != null) {
 				stack1.push(top.left);
 			}
-			if (top.right != null){
+			if (top.right != null) {
 				stack1.push(top.right);
 			}
 		}
-		while (!stack2.empty()){
+		while (!stack2.empty()) {
 			/**
 			 * 左 右 根
 			 */
-			TreeNode top=stack2.pop();
+			TreeNode top = stack2.pop();
 			visit(top);
 		}
 	}
-	public void postOrder2(TreeNode root){
-		Stack<TreeNode>stack=new Stack<>();
-		TreeNode pre=null;
-		while(root != null || !stack.empty()){
-			while (root != null){
+
+	public void postOrder2(TreeNode root) {
+		Stack<TreeNode> stack = new Stack<>();
+		TreeNode pre = null;
+		while (root != null || !stack.empty()) {
+			while (root != null) {
 				stack.push(root);
 				root = root.left;
 			}
-			if (!stack.empty()){
-				TreeNode top =stack.peek();
+			if (!stack.empty()) {
+				TreeNode top = stack.peek();
 				/**
 				 * 右节点为空，或者已经访问过了，弹栈、访问、标记
 				 */
-				if (top.right == null || top.right == pre){
+				if (top.right == null || top.right == pre) {
 					visit(top);
-					pre =top;
+					pre = top;
 					root = null;
 					stack.pop();
-				}else {
+				} else {
 					root = top.right;
 				}
 			}
@@ -208,16 +219,16 @@ public class BinaryTree {
 	/**
 	 * 层次遍历/广度优先遍历(BFS)
 	 */
-	public void levelOrder(TreeNode root){
-		Queue<TreeNode>queue=new LinkedList<>();
+	public void levelOrder(TreeNode root) {
+		Queue<TreeNode> queue = new LinkedList<>();
 		queue.offer(root);
-		while (!queue.isEmpty()){
-			TreeNode top=queue.poll();
+		while (!queue.isEmpty()) {
+			TreeNode top = queue.poll();
 			visit(top);
-			if(root.left!=null){
+			if (root.left != null) {
 				queue.offer(root.left);
 			}
-			if(root.right!=null){
+			if (root.right != null) {
 				queue.offer(root.right);
 			}
 		}
@@ -226,45 +237,8 @@ public class BinaryTree {
 	/**
 	 * 深度优先遍历(DFS)-就是前中后序遍历
 	 */
-	public void dfs(TreeNode root){
+	public void dfs(TreeNode root) {
 
-	}
-
-
-	/**
-	 * 111. Minimum Depth of Binary Tree
-	 * Given a binary tree, find its minimum depth.
-	 *
-	 * The minimum depth is the number of nodes along the shortest path
-	 * from the root node down to the nearest leaf node.
-	 *
-	 * Note: A leaf is a node with no children.
-	 *
-	 * Example:
-	 *
-	 * Given binary tree [3,9,20,null,null,15,7],
-	 *
-	 *     3
-	 *    / \
-	 *   9  20
-	 *     /  \
-	 *    15   7
-	 * return its minimum depth = 2.
-	 */
-	public int minDepth(TreeNode root) {
-		if (root == null) {
-			return 0;
-		}
-		int left = minDepth(root.left);
-		int right = minDepth(root.right);
-		/**
-		 * 要注意如果有个节点只有一边孩子时，不能返回0，要返回另外一半边的depth。(正常求树的高度)
-		 */
-		if (root.left == null || root.right == null) {
-			return Math.max(left, right) + 1;
-		} else {
-			return Math.min(left, right) + 1;
-		}
 	}
 
 	public int minDepth1(TreeNode root) {
@@ -293,5 +267,41 @@ public class BinaryTree {
 			}
 		}
 		return result;
+	}
+
+	/**
+	 * 111. Minimum Depth of Binary Tree
+	 * Given a binary tree, find its minimum depth.
+	 * <p>
+	 * The minimum depth is the number of nodes along the shortest path
+	 * from the root node down to the nearest leaf node.
+	 * <p>
+	 * Note: A leaf is a node with no children.
+	 * <p>
+	 * Example:
+	 * <p>
+	 * Given binary tree [3,9,20,null,null,15,7],
+	 * <p>
+	 * 3
+	 * / \
+	 * 9  20
+	 * /  \
+	 * 15   7
+	 * return its minimum depth = 2.
+	 */
+	public int minDepth(TreeNode root) {
+		if (root == null) {
+			return 0;
+		}
+		int left = minDepth(root.left);
+		int right = minDepth(root.right);
+		/**
+		 * 要注意如果有个节点只有一边孩子时，不能返回0，要返回另外一半边的depth。(正常求树的高度)
+		 */
+		if (root.left == null || root.right == null) {
+			return Math.max(left, right) + 1;
+		} else {
+			return Math.min(left, right) + 1;
+		}
 	}
 }
