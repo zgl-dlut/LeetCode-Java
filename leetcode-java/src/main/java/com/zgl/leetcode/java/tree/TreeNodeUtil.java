@@ -1,8 +1,6 @@
 package com.zgl.leetcode.java.tree;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * @author zgl
@@ -117,9 +115,106 @@ public class TreeNodeUtil {
 		return root;
 	}
 
+	public static void printPreOrder(TreeNode root) {
+		List<Integer> result = new ArrayList<>();
+		Stack<TreeNode> stack = new Stack<>();
+		while (root != null || !stack.isEmpty()) {
+			while (root != null) {
+				stack.push(root);
+				result.add(root.val);
+				root = root.left;
+			}
+			if (!stack.isEmpty()) {
+				TreeNode top = stack.pop();
+				root = top.right;
+			}
+		}
+		System.out.println(result);
+	}
+
+	public static void printInOrder(TreeNode root) {
+		List<Integer> result = new ArrayList<>();
+		Stack<TreeNode> stack = new Stack<>();
+		while (root != null || !stack.isEmpty()) {
+			while (root != null) {
+				stack.push(root);
+				root = root.left;
+			}
+			if (!stack.isEmpty()) {
+				TreeNode top = stack.pop();
+				result.add(top.val);
+				root = top.right;
+			}
+		}
+		System.out.println(result);
+	}
+
+	public static void printPostOrder(TreeNode root) {
+		List<Integer> result = new ArrayList<>();
+		Stack<TreeNode> stack = new Stack<>();
+		TreeNode pre = null;
+		while (root != null || !stack.isEmpty()) {
+			while (root != null) {
+				stack.push(root);
+				root = root.left;
+			}
+			if (!stack.isEmpty()) {
+				TreeNode top = stack.peek();
+				if (top.right == null || top.right == pre) {
+					result.add(top.val);
+					pre = top;
+					root = null;
+					stack.pop();
+				} else {
+					root = top.right;
+				}
+			}
+		}
+		System.out.println(result);
+	}
+
+	public static void printLevelOrder(TreeNode root) {
+		List<Integer> result = new ArrayList<>();
+		Queue<TreeNode> queue = new LinkedList<>();
+		queue.offer(root);
+		while (!queue.isEmpty()) {
+			TreeNode top = queue.poll();
+			result.add(top.val);
+			if (top.left != null) {
+				queue.offer(top.left);
+			}
+			if (top.right != null) {
+				queue.offer(top.right);
+			}
+		}
+		System.out.println(result);
+	}
+
+	public static TreeNode createBST(int[] nums) {
+		if (nums.length == 0 ) {
+			return null;
+		}
+		return bstHelper(nums, 0, nums.length - 1);
+	}
+
+	private static TreeNode bstHelper (int[] nums, int left, int right) {
+		if (left <= right) {
+			int mid = (left + right) / 2;
+			TreeNode newRoot = new TreeNode(nums[mid]);
+			newRoot.left = bstHelper(nums, left, mid - 1);
+			newRoot.right = bstHelper(nums, mid  + 1, right);
+			return newRoot;
+		} else {
+			return null;
+		}
+	}
+
 	public static void main(String[] args) {
 		Integer[] values = {1,2,null,null,3,4,null,null,5,null,null};
 		TreeNode treeNode = TreeNodeUtil.createBinaryTreeByPreOrderArray(values);
-		System.out.println(treeNode);
+		printPreOrder(treeNode);
+		printInOrder(treeNode);
+		printPostOrder(treeNode);
+		printLevelOrder(treeNode);
 	}
 }
