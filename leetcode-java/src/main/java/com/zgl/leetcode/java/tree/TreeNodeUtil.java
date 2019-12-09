@@ -115,6 +115,10 @@ public class TreeNodeUtil {
 		return root;
 	}
 
+	/**
+	 * 前序遍历打印
+	 * @param root
+	 */
 	public static void printPreOrder(TreeNode root) {
 		List<Integer> result = new ArrayList<>();
 		Stack<TreeNode> stack = new Stack<>();
@@ -132,6 +136,10 @@ public class TreeNodeUtil {
 		System.out.println(result);
 	}
 
+	/**
+	 * 中序遍历打印
+	 * @param root
+	 */
 	public static void printInOrder(TreeNode root) {
 		List<Integer> result = new ArrayList<>();
 		Stack<TreeNode> stack = new Stack<>();
@@ -149,6 +157,10 @@ public class TreeNodeUtil {
 		System.out.println(result);
 	}
 
+	/**
+	 * 后序遍历打印
+	 * @param root
+	 */
 	public static void printPostOrder(TreeNode root) {
 		List<Integer> result = new ArrayList<>();
 		Stack<TreeNode> stack = new Stack<>();
@@ -173,6 +185,10 @@ public class TreeNodeUtil {
 		System.out.println(result);
 	}
 
+	/**
+	 * 层次遍历打印
+	 * @param root
+	 */
 	public static void printLevelOrder(TreeNode root) {
 		List<Integer> result = new ArrayList<>();
 		Queue<TreeNode> queue = new LinkedList<>();
@@ -190,6 +206,11 @@ public class TreeNodeUtil {
 		System.out.println(result);
 	}
 
+	/**
+	 * 创建平衡二叉树
+	 * @param nums
+	 * @return
+	 */
 	public static TreeNode createBST(int[] nums) {
 		if (nums.length == 0 ) {
 			return null;
