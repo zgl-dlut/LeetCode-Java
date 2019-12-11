@@ -237,5 +237,8 @@ public class TreeNodeUtil {
 		printInOrder(treeNode);
 		printPostOrder(treeNode);
 		printLevelOrder(treeNode);
+		System.out.println(3|9);//11
+		System.out.println(3&9);//1
+		System.out.println(3^9);//10
 	}
 }
