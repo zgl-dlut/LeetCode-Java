@@ -7,9 +7,9 @@ package com.zgl.leetcode.java.array;
 public class BinarySearch {
 
 	public static void main(String[] args) {
-		int[] nums = {1,3,4,5,5,8,9,12,14};
+		int[] nums = {1,3,4,5,9,12,14};
 		BinarySearch mock = new BinarySearch();
-		System.out.println(mock.binaryFirstEqualSearch(nums, 5));
+		System.out.println(mock.binarySearch(nums, 5));
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class BinarySearch {
 	/**
 	 * 查找第一个值等于给定的元素
 	 */
-	public int binaryFirstEqualSearch(int[] numbers, int target) {
+	public int binaryFirstEqualSearch1(int[] numbers, int target) {
 		int n = numbers.length;
 		int left = 0;
 		int right = n - 1;
@@ -82,6 +82,23 @@ public class BinarySearch {
 			}
 		}
 		return -1;
+	}
+
+	public int binaryFirstEqualSearch(int[] numbers, int target) {
+		int n = numbers.length;
+		int left = 0;
+		int right = n;
+		while (left < right) {
+			int mid = (left + right) / 2;
+			if (numbers[mid] == target) {
+				right = mid;
+			} else if (numbers[mid] < target) {
+				left = mid + 1;
+			} else {
+				right = mid;
+			}
+		}
+		return numbers[left] == target ? left : -1;
 	}
 
 	/**
@@ -111,6 +128,22 @@ public class BinarySearch {
 		return -1;
 	}
 
+	public int binaryLastEqualSearch1(int[] numbers, int target) {
+		int n = numbers.length;
+		int left = 0;
+		int right = n;
+		while (left < right) {
+			int mid = (left + right) / 2;
+			if (numbers[mid] == target) {
+				left = mid + 1;
+			} else if (numbers[mid] < target) {
+				left = mid + 1;
+			} else {
+				right = mid;
+			}
+		}
+		return numbers[left - 1] == target ? left - 1 : -1;
+	}
 	/**
 	 * 查找第一个大于等于给定值得元素
 	 * @param nums
