@@ -92,6 +92,9 @@ public class LRUCache extends LinkedHashMap<Integer, Integer> {
 		cache.get(1);       // returns -1 (not found)
 		cache.get(3);       // returns 3
 		cache.get(4);       // returns 4
+		for (int i = 0; i < 10; i++) {
+			System.out.println(UUID.randomUUID());
+		}
 	}
 
 	@Override

@@ -56,14 +56,46 @@ public class Sort {
 		}
 		return array;
 	}
+	public static void main(String[] args) {
+		Sort mock = new Sort();
+		int[] numbers = {49, 38, 65, 97, 76, 13, 27, 49};
+		mock.quickSort(numbers, 0, 7);
+		//System.out.println("传统冒泡排序");
+		//mock.bubbleSort(numbers);
+		//System.out.println("改进冒泡排序");
+		mock.bubbleSortAdvanced(numbers);
+		int[] res = mock.mergeSort(numbers,0,7);
+		for (int i : res) {
+			System.out.print(i + " ");
+		}
+		//mock.heapSort(numbers);
+		//mock.directInsertSort(numbers);
+		//mock.binaryInsertSort(numbers);
+		Map<Integer, Integer> orderMap = new HashMap<>();
+		orderMap.put(49, 1);
+		orderMap.put(38, 2);
+		orderMap.put(65, 3);
+		orderMap.put(97, 4);
+		List<Integer> list = new ArrayList<>();
+		list.add(49);
+		list.add(38);
+		list.add(65);
+		list.add(97);
+		/*Collections.sort(list, (Integer o1, Integer o2)-> o2-o1);
+		list.sort((Integer o1, Integer o2)-> o2-o1);*/
+
+		list.sort(Comparator.comparingInt(o1 -> orderMap.get(o1)));
+		//list.stream().forEach(i -> System.out.println(i));
+	}
+
 	/**
 	 * 冒泡排序
 	 */
 	public int[] bubbleSort(int[] numbers) {
 		int length = numbers.length;
 		int i, j;
-		boolean flag = false;
 		for (i = 0; i < length - 1; i++) {
+			boolean flag = false;
 			for (j = 0; j < length - 1 - i; j++) {
 				if (numbers[j] > numbers[j + 1]) {
 					swap(numbers, j, j + 1);
@@ -73,32 +105,6 @@ public class Sort {
 			if (!flag) {
 				break;
 			}
-			for (int k : numbers) {
-				System.out.print(k + " ");
-			}
-			System.out.println();
-		}
-		return numbers;
-	}
-
-	/**
-	 * 改进版冒泡排序
-	 */
-	public int[] bubbleSortAdvanced(int[] numbers) {
-		int start = 0, end = numbers.length;
-		while (start < end){
-			for(int i = start; i < end - 1; i++){
-				if(numbers[i] > numbers[i + 1]){
-					swap(numbers, i, i + 1);
-				}
-			}
-			end--;
-			for(int i = end; i > start; i--){
-				if(numbers[i] < numbers[i - 1]){
-					swap(numbers, i - 1, i);
-				}
-			}
-			start++;
 			for (int k : numbers) {
 				System.out.print(k + " ");
 			}
@@ -163,36 +169,32 @@ public class Sort {
 		return left;
 	}
 
-	public static void main(String[] args) {
-		Sort mock = new Sort();
-		int[] numbers = {49, 38, 65, 97, 76, 13, 27, 49};
-		//mock.quickSort(numbers, 0, 7);
-		//System.out.println("传统冒泡排序");
-		//mock.bubbleSort(numbers);
-		//System.out.println("改进冒泡排序");
-		//mock.bubbleSortAdvanced(numbers);
-		int[] res = mock.mergeSort(numbers,0,7);
-		for (int i : res) {
-			System.out.print(i + " ");
+	/**
+	 * 改进版冒泡排序
+	 */
+	public int[] bubbleSortAdvanced(int[] numbers) {
+		int start = 0, end = numbers.length;
+		while (start < end){
+			//将最大值放到了末尾
+			for(int i = start; i < end - 1; i++){
+				if(numbers[i] > numbers[i + 1]){
+					swap(numbers, i, i + 1);
+				}
+			}
+			end--;
+			//将最小值放到了开头
+			for(int i = end; i > start; i--){
+				if(numbers[i] < numbers[i - 1]){
+					swap(numbers, i - 1, i);
+				}
+			}
+			start++;
+			for (int k : numbers) {
+				System.out.print(k + " ");
+			}
+			System.out.println();
 		}
-		//mock.heapSort(numbers);
-		//mock.directInsertSort(numbers);
-		//mock.binaryInsertSort(numbers);
-		Map<Integer, Integer> orderMap = new HashMap<>();
-		orderMap.put(49, 1);
-		orderMap.put(38, 2);
-		orderMap.put(65, 3);
-		orderMap.put(97, 4);
-		List<Integer> list = new ArrayList<>();
-		list.add(49);
-		list.add(38);
-		list.add(65);
-		list.add(97);
-		/*Collections.sort(list, (Integer o1, Integer o2)-> o2-o1);
-		list.sort((Integer o1, Integer o2)-> o2-o1);*/
-
-		list.sort(Comparator.comparingInt(o1 -> orderMap.get(o1)));
-		//list.stream().forEach(i -> System.out.println(i));
+		return numbers;
 	}
 
 	/**

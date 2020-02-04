@@ -5,8 +5,10 @@ package com.zgl.leetcode.java.linkedlist;
  * @date 2018/11/25 下午7:46
  */
 
-import java.util.Comparator;
-import java.util.PriorityQueue;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * 21. Merge Two Sorted Lists
@@ -22,6 +24,11 @@ public class MergeSortedList {
 			end = mid;
 			System.out.println(end);
 		}
+		Queue<Integer> queue = new LinkedList<>();
+		Queue<Integer> queue2 = new PriorityQueue<>();
+		Queue<Integer> queue3 = new LinkedBlockingDeque<>();
+		queue.offer(null);
+		queue.offer(null);
 	}
 
 	public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
