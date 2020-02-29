@@ -40,8 +40,9 @@ public class Subsets {
 	}
 
 	public static void main(String[] args) {
-		int[] nums = {1,2,3};
-		new Subsets().subsets(nums);
+		int[] nums = {1,2};
+		List<List<Integer>> res = new Subsets().subsets(nums);
+		System.out.println(res);
 	}
 	/**
 	 * 90. Subsets II

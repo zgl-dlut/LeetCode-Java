@@ -42,7 +42,7 @@ public class BinarySearchTree {
 	 * Output: false
 	 * Explanation: The root node's value is 5 but its right child's value is 4.
 	 */
-	public boolean isValidBST(TreeNode root) {
+	public boolean isValidBST1(TreeNode root) {
 		List<Integer> inOrder = new ArrayList<>();
 		Stack<TreeNode> stack = new Stack<>();
 		while (root != null || !stack.empty()) {
@@ -62,6 +62,19 @@ public class BinarySearchTree {
 			}
 		}
 		return true;
+	}
+	public boolean isValidBST(TreeNode root) {
+		return helper(root, Long.MIN_VALUE, Long.MAX_VALUE);
+	}
+
+	private boolean helper(TreeNode root, long min, long max) {
+		if (root == null) {
+			return true;
+		}
+		if (root.val < min || root.val > max) {
+			return false;
+		}
+		return helper(root.left, min, root.val) && helper(root.right, root.val, max);
 	}
 
 	/**

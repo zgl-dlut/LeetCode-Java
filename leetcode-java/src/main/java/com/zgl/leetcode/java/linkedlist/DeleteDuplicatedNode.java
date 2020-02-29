@@ -68,6 +68,29 @@ public class DeleteDuplicatedNode {
 	 * Input: 1->1->1->2->3
 	 * Output: 2->3
 	 */
+	public ListNode deleteDuplicates2(ListNode head) {
+		if (head == null || head.next == null) {
+			return head;
+		}
+		ListNode result = new ListNode(0);
+		ListNode pre = result, current = head;
+		pre.next = current;
+		while (current != null) {
+			while (current.next != null && current.val == current.next.val) {
+				current = current.next;
+			}
+			/**
+			 * 没有重复
+			 */
+			if (pre.next == current) {
+				pre = pre.next;
+			} else {
+				pre.next = current.next;
+			}
+			current = current.next;
+		}
+		return result.next;
+	}
 	public ListNode deleteCompleteDuplicateds(ListNode head) {
 		if (head == null || head.next == null) {
 			return head;

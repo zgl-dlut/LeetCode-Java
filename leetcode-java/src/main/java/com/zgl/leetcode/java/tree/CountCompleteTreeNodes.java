@@ -12,6 +12,7 @@ public class CountCompleteTreeNodes {
 		Integer[] nums = {1,2,3,4,5,6,7,8};
 		TreeNode treeNode = TreeNodeUtil.createBinaryTreeByArray(nums, 0);
 		System.out.println(new CountCompleteTreeNodes().countNodes(treeNode));
+		System.out.println(1 << 3);
 	}
 
 	/**

@@ -67,4 +67,21 @@ public class FlattenBinaryTree {
 		root.left = null;
 		prev = root;
 	}
+	public void flatten2(TreeNode root) {
+		if (root == null) {
+			return;
+		}
+		while(root != null) {
+			if (root.left != null) {
+				TreeNode current = root.left;
+				while(current.right != null) {
+					current = current.right;
+				}
+				current.right = root.right;
+				root.right = root.left;
+				root.left = null;
+			}
+			root = root.right;
+		}
+	}
 }
