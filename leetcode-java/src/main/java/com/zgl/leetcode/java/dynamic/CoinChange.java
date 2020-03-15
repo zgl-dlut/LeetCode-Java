@@ -57,7 +57,7 @@ public class CoinChange {
 
 	public static void main(String[] args) {
 		int[] coins = {5,2,1};
-		System.out.println(new CoinChange().coinChangeMax(coins, 7));
+		System.out.println(new CoinChange().coinChange(coins, 7));
 	}
 
 	public int coinChangeMax(int[] coins, int amount) {

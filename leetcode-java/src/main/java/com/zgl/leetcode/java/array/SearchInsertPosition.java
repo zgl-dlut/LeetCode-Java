@@ -1,5 +1,8 @@
 package com.zgl.leetcode.java.array;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -114,16 +117,7 @@ public class SearchInsertPosition {
 	}
 
 	public static void main(String[] args) {
-		/*int[] nums = {1, 3, 5, 6};
-		int tag = new SearchInsertPosition().searchInsert(nums, 5);
-		System.out.println(tag);*/
-		int[] nums={5,7,7,8,8,10};
-		int target=7;
-		SearchInsertPosition mock=new SearchInsertPosition();
-		int[] result=mock.searchRange(nums,target);
-		for (int i:result){
-			System.out.println(i);
-		}
-		System.out.println(2<<1);
+		System.out.println(LocalDate.now().toString().substring(0,10));
+		System.out.println(LocalTime.now().toString().substring(0,5));
 	}
 }

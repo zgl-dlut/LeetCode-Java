@@ -33,6 +33,12 @@ public class FirstMissingPositive {
 		if (length == 0) {
 			return 1;
 		}
+		/**
+		 * 假设数组的大小为n，我们遍历整个数组，如果当前元素i在1-n之间那么就将当前元素和数组第i-1个元素交换。如果当前元素是复数或者大于n那么就不处理。
+		 * 这样遍历完所有的元素之后，原始数组当中出现在1-n之间的元素都被放在了对应的0~n-1的位置里。
+		 * 再次遍历数组，找到第一个不满足v[i]==i+1的位置，那么i+1就是最小的未出现的正整数
+		 * 比如nums[i] == 2,那么需要将数组中的位置2-1放入2也就是nums[nums[i] - 1] = 2;
+		 */
 		for (int i = 0; i < length; i++) {
 			if (nums[i] > 0) {
 				while (nums[i] > 0 && nums[i] <= length && nums[i] != nums[nums[i] - 1]) {

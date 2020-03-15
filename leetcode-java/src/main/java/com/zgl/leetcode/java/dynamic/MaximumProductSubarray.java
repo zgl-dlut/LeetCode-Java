@@ -7,7 +7,7 @@ package com.zgl.leetcode.java.dynamic;
 public class MaximumProductSubarray {
 
 	/**
-	 * 126. Maximum Product Subarray
+	 * 152. Maximum Product Subarray
 	 * Given an integer array nums, find the contiguous subarray within an array
 	 * (containing at least one number) which has the largest product.
 	 *
@@ -37,6 +37,17 @@ public class MaximumProductSubarray {
 		return result;
 	}
 
+	public int maxProduct1(int[] nums) {
+		int dpMin = nums[0], dpMax = nums[0], result = nums[0];
+		for (int i = 1; i < nums.length; i++) {
+			int min = dpMin * nums[i];
+			int max = dpMax * nums[i];
+			dpMin = Math.min(Math.min(min, max), nums[i]);
+			dpMax = Math.max(Math.max(min, max), nums[i]);
+			result = Math.max(result, dpMax);
+		}
+		return result;
+	}
 	public static void main(String[] args) {
 		int[] nums = {0,2};
 		System.out.println(new MaximumProductSubarray().maxProduct(nums));

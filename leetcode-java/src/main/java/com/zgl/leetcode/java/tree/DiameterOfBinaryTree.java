@@ -37,4 +37,10 @@ public class DiameterOfBinaryTree {
 		result = Math.max(result, left + right);
 		return Math.max(left, right) + 1;
 	}
+
+	public static void main(String[] args) {
+		Integer[] array = new Integer[] {1,2,3,4,5};
+		TreeNode root = TreeNodeUtil.createBinaryTreeByLevelOrderArray(array);
+		System.out.println(new DiameterOfBinaryTree().diameterOfBinaryTree(root));
+	}
 }

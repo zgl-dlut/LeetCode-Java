@@ -1,5 +1,7 @@
 package com.zgl.leetcode.java.dynamic;
 
+import java.util.Arrays;
+
 /**
  * 最长递增子序列
  *
@@ -9,9 +11,7 @@ package com.zgl.leetcode.java.dynamic;
 public class LIS {
 	public int lengthOfLIS(int[] numbers) {
 		int[] dp = new int[numbers.length];
-		for (int i = 0; i < numbers.length; i++) {
-			dp[i] = 1;
-		}
+		Arrays.fill(dp, 1);
 		int result = 1;
 		/**
 		 * dp[i]表示以i为结尾的最长递增序列长度

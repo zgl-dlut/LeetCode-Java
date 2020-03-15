@@ -304,4 +304,5 @@ public class BinaryTree {
 			return Math.min(left, right) + 1;
 		}
 	}
+
 }
