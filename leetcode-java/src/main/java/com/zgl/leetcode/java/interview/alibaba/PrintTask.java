@@ -6,10 +6,26 @@ import java.util.Scanner;
  * @author zgl
  * @date 2020/3/10 下午9:28
  */
-public class PrintTask implements Runnable{
+public class PrintTask implements Runnable {
 
-	private static Object object; // 静态对象用于上锁
-	private static int count = 0; // 静态变量用于计数
+	/**
+	 * 静态对象用于上锁
+	 */
+	private static final Object LOCK = new Object();
+	/**
+	 * 静态变量用于计数
+	 */
+	private static int count = 0;
+	private static int totalCount = 0;
+	private int size;
+	private String name;
+	private int threadId;
+	public PrintTask(String name, int threadId, int size) {
+		this.name = name;
+		this.threadId = threadId;
+		this.size = size;
+	}
+
 	/**
 	 * 多线程：
 	 * 如下程序通过N个线程顺序循环打印从0至100，如给定N=3则输出：
@@ -21,46 +37,43 @@ public class PrintTask implements Runnable{
 	 * ..
 	 * 注意线程号与输出顺序间的关系
 	 */
-	private String name;
-	private int threadId;
-	private int totalCount;
-
-
-	public PrintTask(Object object,String name, int threadId, int totalCount) {
-		PrintTask.object = object;
-		this.name = name;
-		this.threadId = threadId;
-		this.totalCount = totalCount;
-	}
-
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		Object object = new Object();
-		int N = sc.nextInt();
-		if (N == 0) {
+		int size = sc.nextInt();
+		if (size == 0) {
 			return;
 		}
-
-		for (int i = 0; i < N; ++i) {
-			new Thread(new PrintTask(object,"线程 " + i, i, N)).start();
+		int count = sc.nextInt();
+		if (count == 0) {
+			return;
+		}
+		totalCount = count;
+		for (int i = 0; i < size; ++i) {
+			new Thread(new PrintTask("线程" + i, i, size)).start();
 		}
 	}
 
 	@Override
 	public void run() {
-
-		synchronized (object) {
-			while (count < 100) {
-				if (count % totalCount == threadId) {
-					System.out.println(this.name + " 打印数字 " + count);
-					++count;
-					object.notifyAll();
-				} else {
-					try {
-						object.wait();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
+		while (true) {
+			synchronized (LOCK) {
+				try {
+					//因为当线程wait之后，又被唤醒的时候，是从wait后面开始执行，而不是又从头开始执行的，所以如果用if的话，被唤醒之后就不会在判断if中的条件，而是继续往下执行了
+					while (count % size != threadId) {
+						if (count > totalCount) {
+							break;
+						}
+						LOCK.wait();
 					}
+					//当前线程抢占,需要判断条件
+					if (count > totalCount) {
+						break;
+					}
+					System.out.println(name + ":" + count);
+					count++;
+					LOCK.notifyAll();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
 			}
 		}

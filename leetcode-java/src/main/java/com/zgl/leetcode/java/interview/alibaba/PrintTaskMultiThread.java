@@ -37,11 +37,11 @@ public class PrintTaskMultiThread {
 		MyPrintTaskLock myPrintTaskLock = new MyPrintTaskLock(size, count);
 		for (int i = 0; i < size; i++) {
 			int threadNo = i;
-			int loop = myPrintTaskLock.getLoopNumber(threadNo + 1);
+			int loop = printTask.getLoopNumber(threadNo + 1);
 			new Thread(() -> {
 				for (int j = 0; j < loop; j++) {
-					//printTask.print(threadNo);
-					myPrintTaskLock.print(threadNo);
+					printTask.print(threadNo);
+					//myPrintTaskLock.print(threadNo);
 				}
 			}, "thread" + i).start();
 		}
@@ -69,9 +69,6 @@ class MyPrintTask {
 
 	public void print(int threadNo) {
 		synchronized (LOCK) {
-			if (value > count) {
-				return;
-			}
 			try {
 				while (value % size != threadNo) {
 					LOCK.wait();
@@ -107,9 +104,6 @@ class MyPrintTaskLock {
 
 	public void print(int threadNo) {
 		lock.lock();
-		if (value > count) {
-			return;
-		}
 		try {
 			while (value % size != threadNo) {
 				condition.await();

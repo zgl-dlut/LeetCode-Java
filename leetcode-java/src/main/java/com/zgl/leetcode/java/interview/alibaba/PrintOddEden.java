@@ -52,9 +52,6 @@ class SolutionTask {
 	public void printOdd() {
 		synchronized (LOCK) {
 			try {
-				if (value > 100) {
-					return;
-				}
 				while (value % 2 == 0) {
 					LOCK.wait();
 				}
@@ -71,9 +68,6 @@ class SolutionTask {
 	public void printEven() {
 		synchronized (LOCK) {
 			try {
-				if (value > 100) {
-					return;
-				}
 				while (value % 2 != 0) {
 					LOCK.wait();
 				}
@@ -99,9 +93,6 @@ class ShareData {
 	public void printOdd() {
 		lock.lock();
 		try {
-			if (value > 100) {
-				return;
-			}
 			while (value % 2 == 0) {
 				condition1.await();
 			}
@@ -118,9 +109,6 @@ class ShareData {
 	public void printEven() {
 		lock.lock();
 		try {
-			if (value > 100) {
-				return;
-			}
 			while (value % 2 != 0) {
 				condition2.await();
 			}
