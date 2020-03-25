@@ -57,12 +57,15 @@ public class PrintTaskWithSemaphore {
 			threads[i] = new Thread(() -> {
 				while (true) {
 					try {
+						//获取令牌,减一
 						last.acquire();
-						System.out.println(Thread.currentThread().getName() + ":" + count);
-						count++;
 						if (count > totalCount) {
+							release();
 							break;
 						}
+						System.out.println(Thread.currentThread().getName() + ":" + count);
+						count++;
+						//释放令牌,加一
 						current.release();
 					} catch (InterruptedException e) {
 						e.printStackTrace();
@@ -70,6 +73,14 @@ public class PrintTaskWithSemaphore {
 				}
 			}, "thread" + i);
 			threads[i].start();
+		}
+	}
+
+	private void release() {
+		for (Semaphore semaphore : semaphores) {
+			if (semaphore.availablePermits() == 0) {
+				semaphore.release();
+			}
 		}
 	}
 }
