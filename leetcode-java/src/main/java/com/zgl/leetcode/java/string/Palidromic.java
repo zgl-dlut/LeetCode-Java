@@ -140,14 +140,6 @@ public class Palidromic {
 		return dp[0][n - 1];
 	}
 
-	/**
-	 * substring[a,b)左闭右开
-	 */
-	public static void main(String[] args) {
-		String s="abcbc";
-		Palidromic mock=new Palidromic();
-		System.out.println(mock.countSubstrings(s));
-	}
 
 	/**
 	 * 647. Palindromic Substrings
@@ -259,5 +251,53 @@ public class Palidromic {
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * substring[a,b)左闭右开
+	 */
+	public static void main(String[] args) {
+		String s= "A man, a plan, a canal: Panama";
+		Palidromic mock=new Palidromic();
+		System.out.println(mock.isPalindrome(s));
+	}
+
+	/**
+	 * 125. Valid Palindrome
+	 * Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+	 *
+	 * Note: For the purpose of this problem, we define empty string as valid palindrome.
+	 *
+	 * Example 1:
+	 *
+	 * Input: "A man, a plan, a canal: Panama"
+	 * Output: true
+	 * Example 2:
+	 *
+	 * Input: "race a car"
+	 * Output: false
+	 */
+	public boolean isPalindrome(String s) {
+		s = s.toLowerCase();
+		int left = 0, right = s.length() - 1;
+		while (left < right) {
+			while (left < right && !judge(s, left)) {
+				left++;
+			}
+			while (left < right && !judge(s, right)) {
+				right--;
+			}
+			if (s.charAt(left) == s.charAt(right)) {
+				left++;
+				right--;
+			} else {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean judge(String s, int pos) {
+		return (s.charAt(pos) >= 'a'&& s.charAt(pos) <= 'z') || (s.charAt(pos) >= '0' && s.charAt(pos) <= '9');
 	}
 }
