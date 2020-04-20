@@ -10,8 +10,8 @@ public class CourseSchedule {
 
 	//0->1, 0->2, 1->3, 2->3
 	public static void main(String[] args) {
-		int[][] prerequisites = {{0,1}};
-		System.out.println(new CourseSchedule().canFinish(2, prerequisites));
+		int[][] prerequisites = {};
+		System.out.println(new CourseSchedule().canFinish(1, prerequisites));
 		/*int[] res = new CourseSchedule().findOrder(4, prerequisites);
 		for (int i = 0; i < res.length; i++) {
 			System.out.print(res[i]);
@@ -48,46 +48,41 @@ public class CourseSchedule {
 	//int[][] prerequisites = {{1,0},{2,0},{3,1},{3,2}};
 	//0->1, 0->2, 1->3, 2->3
 	public boolean canFinish(int numCourses, int[][] prerequisites) {
-		//存储每个节点的出度
 		Map<Integer, List<Integer>> graph = new HashMap<>();
-		//存储入度
-		int[] degrees = new int[numCourses];
-		for(int i = 0; i < prerequisites.length; i++) {
-			//first->second
-			int first = prerequisites[i][1];
-			int second = prerequisites[i][0];
-			if(!graph.containsKey(first)) {
-				graph.put(first, new ArrayList<>());
-			}
-			graph.get(first).add(second);
-			degrees[second]++;
-		}
+		int[] edgeDegrees = new int[numCourses];
+		this.init(prerequisites, graph, edgeDegrees);
 		Queue<Integer> queue = new LinkedList<>();
-		/*for(int i : degrees) {
-			if(i == 0) {
-				queue.offer(i);
-			}
-		}*/
 		for (int i = 0; i < numCourses; i++) {
-			if(degrees[i] == 0) {
+			if (edgeDegrees[i] == 0) {
 				queue.offer(i);
 			}
 		}
 		int count = 0;
-		while(!queue.isEmpty()) {
-			int degree = queue.poll();
+		while (!queue.isEmpty()) {
 			count++;
-			if(graph.containsKey(degree)) {
-				List<Integer> out = graph.get(degree);
-				for(int i : out) {
-					degrees[i]--;
-					if(degrees[i] == 0) {
-						queue.offer(i);
+			int front = queue.poll();
+			if (graph.containsKey(front)) {
+				List<Integer> nodes = graph.get(front);
+				for (int node : nodes) {
+					edgeDegrees[node]--;
+					if (edgeDegrees[node] == 0) {
+						queue.offer(node);
 					}
 				}
 			}
 		}
 		return count == numCourses;
+	}
+	private void init(int[][] prerequisites, Map<Integer, List<Integer>> graph, int[] edgeDegrees) {
+		for (int i = 0; i < prerequisites.length; i++) {
+			int from = prerequisites[i][1];
+			int to = prerequisites[i][0];
+			if (!graph.containsKey(from)) {
+				graph.put(from, new ArrayList<>());
+			}
+			graph.get(from).add(to);
+			edgeDegrees[to]++;
+		}
 	}
 
 	/**
@@ -103,15 +98,7 @@ public class CourseSchedule {
 	public int[] findOrder(int numCourses, int[][] prerequisites) {
 		Map<Integer, List<Integer>> graph = new HashMap<>();
 		int[] degree = new int[numCourses];
-		for (int i = 0; i < prerequisites.length; i++) {
-			int first = prerequisites[i][1];
-			int second = prerequisites[i][0];
-			if (!graph.containsKey(first)) {
-				graph.put(first, new ArrayList<>());
-			}
-			graph.get(first).add(second);
-			degree[second]++;
-		}
+		this.init(prerequisites, graph, degree);
 		Queue<Integer> queue = new LinkedList<>();
 		for (int i = 0; i < numCourses; i++) {
 			if (degree[i] == 0) {
@@ -124,6 +111,7 @@ public class CourseSchedule {
 			int value = queue.poll();
 			result[tag++] = value;
 			count++;
+
 			if (graph.containsKey(value)) {
 				for (Integer integer : graph.get(value)) {
 					degree[integer]--;

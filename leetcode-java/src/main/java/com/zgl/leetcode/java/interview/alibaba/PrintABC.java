@@ -48,19 +48,19 @@ public class PrintABC{
 		PrintABC printABC = new PrintABC(a, b, c);
 
 		new Thread(() -> {
-			for (int i = 0; i < 2; i++) {
+			for (int i = 0; i < a; i++) {
 				printABC.printA();
 			}
 		}, "threadA").start();
 
 		new Thread(() -> {
-			for (int i = 0; i < 2; i++) {
+			for (int i = 0; i < b; i++) {
 				printABC.printB();
 			}
 		}, "threadB").start();
 
 		new Thread(() -> {
-			for (int i = 0; i < 2; i++) {
+			for (int i = 0; i < c; i++) {
 				printABC.printC();
 			}
 		}, "threadC").start();

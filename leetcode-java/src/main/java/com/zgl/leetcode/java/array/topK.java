@@ -62,5 +62,27 @@ public class topK {
 		}
 		return result;
 	}
+	@SuppressWarnings("unchecked")
+	public List<Integer> topKFrequent(int[] nums, int k) {
+		int length = nums.length;
+		Map<Integer, Integer> map = new HashMap<>();
+		for (int i : nums) {
+			map.put(i, map.getOrDefault(i, 0) + 1);
+		}
+		List<Integer>[] countListArray = new ArrayList[length + 1];
+		for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+			if (countListArray[entry.getValue()] == null) {
+				countListArray[entry.getValue()] = new ArrayList<>();
+			}
+			countListArray[entry.getValue()].add(entry.getKey());
+		}
+		List<Integer> result = new ArrayList<>();
+		for (int i = length; i >= 0 && result.size() < k; i--) {
+			if (countListArray[i] != null) {
+				result.addAll(countListArray[i]);
+			}
+		}
+		return result;
+	}
 
 }
