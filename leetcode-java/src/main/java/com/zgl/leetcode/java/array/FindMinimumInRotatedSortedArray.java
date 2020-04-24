@@ -71,7 +71,7 @@ public class FindMinimumInRotatedSortedArray {
 	 * Input: [2,2,2,0,1]
 	 * Output: 0
 	 */
-	public int findMin(int[] nums) {
+	public int findMin2(int[] nums) {
 		int length = nums.length;
 		int left = 0, right = length - 1;
 		while (left <= right) {

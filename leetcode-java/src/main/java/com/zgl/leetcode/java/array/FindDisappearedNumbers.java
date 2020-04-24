@@ -45,12 +45,10 @@ public class FindDisappearedNumbers {
 
 	public List<Integer> findDisappearedNumbers(int[] nums) {
 		for (int i = 0; i < nums.length; i++) {
-			int cur = nums[i];
-			while (nums[cur - 1] != cur) {
-				int temp = nums[cur - 1];
-				nums[cur -  1] = cur;
+			while (nums[nums[i] - 1] != nums[i]) {
+				int temp = nums[nums[i] - 1];
+				nums[nums[i] - 1] = temp;
 				nums[i] = temp;
-				cur = temp;
 			}
 		}
 		List<Integer> result = new ArrayList<>();

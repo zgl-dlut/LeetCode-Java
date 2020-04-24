@@ -14,7 +14,7 @@ public class MaxNumber {
 	 	int[] nums = {9,3,32,33,303};
 		System.out.println(new MaxNumber().getMax(nums));
 		System.out.println(new MaxNumber().maxNumber(nums));
-		System.out.println("33".compareTo("32"));
+		System.out.println("33_3".compareTo("33_4"));
 	}
 
 	/**

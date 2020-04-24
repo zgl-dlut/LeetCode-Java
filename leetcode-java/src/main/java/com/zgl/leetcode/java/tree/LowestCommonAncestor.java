@@ -1,8 +1,6 @@
 package com.zgl.leetcode.java.tree;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author zgl
@@ -32,6 +30,8 @@ public class LowestCommonAncestor {
 		//如果发现了目标节点，则继续向上标记为该目标节点
 		return left == null ? right : left;
 	}
+
+
 
 	public static String getItem(int [] arr){//重组arr，取出最大的数
 		String [] strArr = new String[arr.length];
