@@ -88,23 +88,6 @@ public class Permutation {
 		return res;
 	}
 
-	/*
-		private void dfs(int[] nums, boolean[] used, List<Integer> list, List<List<Integer>> res) {
-			if (list.size() == nums.length) {
-				res.add(new ArrayList<>(list));
-				return;
-			}
-			for (int i = 0; i < nums.length; i++) {
-				if (!used[i]) {
-					used[i] = true;
-					list.add(nums[i]);
-					dfs(nums, used, list, res);
-					used[i] = false;
-					list.remove(list.size() - 1);
-				}
-			}
-		}
-	*/
 	private void dfs(int[] nums, boolean[] used, List<Integer> list, List<List<Integer>> res) {
 		if (list.size() == nums.length) {
 			res.add(new ArrayList<>(list));
