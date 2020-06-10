@@ -172,6 +172,8 @@ public class StreamTest {
 		StreamTest streamTest = new StreamTest();
 		System.out.println(streamTest.groups1);
 		System.out.println(streamTest.groups2);
+		Student student = new Student();
+		System.out.println(Objects.isNull(null));
 	}
 
 
@@ -204,6 +206,7 @@ class Student {
 		this.school = school;
 	}
 
+	public Student(){}
 	public long getId() {
 		return id;
 	}

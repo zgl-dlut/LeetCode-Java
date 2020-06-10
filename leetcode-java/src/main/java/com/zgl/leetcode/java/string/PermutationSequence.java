@@ -39,9 +39,12 @@ public class PermutationSequence {
 		for (int i = n; i >= 1; i--) {
 			factorial /= i;
 			int index = (k - 1) / factorial;
+			//第k个排列的第一个元素在0-n中的位置为（k-1）/（n-1）！
+			//总共有n个数字，那么以每个数字开头都有(n-1)!种
 			String tag = "" + temp.charAt(index);
 			result.append(tag);
 			temp.deleteCharAt(index);
+			//﻿在剩下的元素中继续找第一个
 			k -= index * factorial;
 		}
 		return result.toString();

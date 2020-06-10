@@ -45,11 +45,7 @@ public class BSTIterator {
 		return cur < size;
 	}
 
-	private void inOrder(TreeNode root) {
-		if (root == null) {
-			return;
-		}
-		Stack<TreeNode> stack = new Stack<>();
+	public static void inorder(TreeNode root, Stack<TreeNode> stack, List<Integer> inorder) {
 		while (root != null || !stack.isEmpty()) {
 			while (root != null) {
 				stack.push(root);
@@ -61,5 +57,13 @@ public class BSTIterator {
 				root = top.right;
 			}
 		}
+	}
+
+	private void inOrder(TreeNode root) {
+		if (root == null) {
+			return;
+		}
+		Stack<TreeNode> stack = new Stack<>();
+		inorder(root, stack, inorder);
 	}
 }

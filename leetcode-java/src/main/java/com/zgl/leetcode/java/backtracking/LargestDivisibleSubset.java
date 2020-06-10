@@ -28,7 +28,7 @@ public class LargestDivisibleSubset {
 	private List<Integer> result = new ArrayList<>();
 
 	public static void main(String[] args) {
-		int[] nums = {3,4,16,8};
+		int[] nums = {1,2,4,8};
 		System.out.println(new LargestDivisibleSubset().largestDivisibleSubset(nums));
 	}
 
@@ -59,6 +59,8 @@ public class LargestDivisibleSubset {
 	}
 
 	public List<Integer> largestDivisibleSubset(int[] nums) {
+		//定义一个动态数组dp，其中dp[i]表示到数字nums[i]位置最大可整除的子集合的长度
+		//两个整型变量max和idx分别表示最大子集合的长度和起始数字的位置
 		int[] dp = new int[nums.length];
 		Map<Integer, Integer> map = new HashMap<>();
 		int max = -1, idx = -1;

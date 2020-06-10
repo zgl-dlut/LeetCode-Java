@@ -276,7 +276,7 @@ public class Sort {
 	/**
 	 * 构建大根堆
 	 */
-	private int [] buildMaxHeap(int[] array){
+	private int[] buildMaxHeap(int[] array){
 		/**
 		 * 从最后一个节点array.length-1的父节点（array.length-1-1）/2开始，直到根节点0，反复调整堆
 		 */

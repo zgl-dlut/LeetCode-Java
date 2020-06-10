@@ -39,9 +39,11 @@ public class MaxNumber {
 			newStrArray[i] = strArray[i];
 			String lastChar = strArray[i].substring(strArray[i].length() - 1, strArray[i].length());
 			//填充长度至数组中元素的最大长度(填充最后一位)
+			//比如2,21结果应该是221,而不是212,所以2填充成22而不是20或者其他
 			for(int j = 0; j < maxLength - strArray[i].length(); j++) {
 				newStrArray[i] += lastChar;
 			}
+			//有重复的元素也要put到map中,此时需要构造不同的key,顺序需要保证自然顺序
 			if(countMap.containsKey(newStrArray[i])) {
 				newStrArray[i] += "_" + i;
 			}

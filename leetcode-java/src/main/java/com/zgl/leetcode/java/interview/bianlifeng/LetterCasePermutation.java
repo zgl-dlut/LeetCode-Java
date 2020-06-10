@@ -39,4 +39,9 @@ public class LetterCasePermutation {
 			}
 		}
 	}
+
+	public static void main(String[] args) {
+		String str = "a1b2";
+		System.out.println(new LetterCasePermutation().letterCasePermutation(str));
+	}
 }

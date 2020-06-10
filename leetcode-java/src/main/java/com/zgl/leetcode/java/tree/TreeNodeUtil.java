@@ -1,5 +1,7 @@
 package com.zgl.leetcode.java.tree;
 
+import com.zgl.leetcode.java.datastructure.BSTIterator;
+
 import java.util.*;
 
 /**
@@ -143,17 +145,7 @@ public class TreeNodeUtil {
 	public static void printInOrder(TreeNode root) {
 		List<Integer> result = new ArrayList<>();
 		Stack<TreeNode> stack = new Stack<>();
-		while (root != null || !stack.isEmpty()) {
-			while (root != null) {
-				stack.push(root);
-				root = root.left;
-			}
-			if (!stack.isEmpty()) {
-				TreeNode top = stack.pop();
-				result.add(top.val);
-				root = top.right;
-			}
-		}
+		BSTIterator.inorder(root, stack, result);
 		System.out.println(result);
 	}
 

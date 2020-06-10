@@ -33,8 +33,12 @@ public class Combinations {
 		return result;
 	}
 
+	public static void main(String[] args) {
+		System.out.println(new Combinations().combine(4, 2));
+	}
+
 	private void helper(int n, int k, int start, List<Integer> answer, List<List<Integer>> result) {
-		/*if (answer.size() == k) {
+		if (answer.size() == k) {
 			result.add(new ArrayList<>(answer));
 			System.out.println(result);
 			return;
@@ -43,8 +47,8 @@ public class Combinations {
 			answer.add(i);
 			helper(n, k, i + 1, answer, result);
 			answer.remove(answer.size() - 1);
-		}*/
-		if (k == 0) {
+		}
+		/*if (k == 0) {
 			result.add(new ArrayList<>(answer));
 			System.out.println(result);
 			return;
@@ -54,10 +58,6 @@ public class Combinations {
 			helper(n, k - 1, i + 1, answer, result);
 			System.out.println(answer);
 			answer.remove(answer.size() - 1);
-		}
-	}
-
-	public static void main(String[] args) {
-		new Combinations().combine(4, 2);
+		}*/
 	}
 }

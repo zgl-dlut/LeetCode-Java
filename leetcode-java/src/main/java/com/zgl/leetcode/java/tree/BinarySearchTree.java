@@ -123,6 +123,8 @@ public class BinarySearchTree {
 		List<TreeNode> nodeList = new ArrayList<>();
 		inOrder(root, inOrder, nodeList);
 		inOrder.sort(Comparator.comparingInt(a -> a));
+		//inOrder.sort(Comparator.naturalOrder());
+		//inOrder.sort(Comparator.reverseOrder());
 		for (int i = 0; i < nodeList.size(); i++){
 			nodeList.get(i).val = inOrder.get(i);
 		}

@@ -60,8 +60,7 @@ public class BinarySearch {
 		}
 	}
 
-	/**
-	 * 查找第一个值等于给定的元素
+	/**查找第一个值等于给定的元素
 	 */
 	public int binaryFirstEqualSearch1(int[] numbers, int target) {
 		int n = numbers.length;

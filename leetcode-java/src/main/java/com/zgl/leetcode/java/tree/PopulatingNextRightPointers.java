@@ -58,7 +58,7 @@ public class PopulatingNextRightPointers {
 	 */
 	public Node connect(Node root) {
 		if (root == null) {
-			return root;
+			return null;
 		}
 		Queue<Node> queue = new LinkedList<>();
 		queue.offer(root);

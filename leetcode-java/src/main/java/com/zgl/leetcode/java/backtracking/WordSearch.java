@@ -91,4 +91,10 @@ public class WordSearch {
 		}
 		return result;
 	}
+
+	public static void main(String[] args) {
+		char a = 'a';
+		System.out.println(a ^ 128);
+		System.out.println(a ^128 ^ 128);
+	}
 }

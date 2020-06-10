@@ -1,8 +1,6 @@
 package com.zgl.leetcode.java.string;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author zgl
@@ -45,25 +43,24 @@ public class LongestSubstring {
 		return result;
 	}
 
-
 	public static void main(String[] args) {
-		/*String s="abba";
+		String s="abcabcbb";
 		LongestSubstring mock=new LongestSubstring();
 		System.out.println(s.length());
-		System.out.println(mock.lengthOfLongestSubstring(s));*/
-		int i,tag,plat;
-		List<Integer> platform=new ArrayList<>();
-		i=1;
-		tag=1;
-		plat=63;
-		for(;i<=6;i++){
-			if((plat&tag)==tag){
-				platform.add(tag);
+		System.out.println(mock.lengthOfLongestSubstring(s));
+
+	}
+
+	public int lengthOfLongestSubstring1(String s) {
+		Map<Character, Integer> map = new HashMap<>();
+		int result = 0;
+		for (int left = 0, cur = 0; cur < s.length(); cur++) {
+			if (map.containsKey(s.charAt(cur))) {
+				left = Math.max(left, map.get(s.charAt(cur)));
 			}
-			tag=tag<<1;
+			map.put(s.charAt(cur), cur + 1);
+			result = Math.max(result, cur - left + 1);
 		}
-		for(int j:platform){
-			System.out.println(j);
-		}
+		return result;
 	}
 }

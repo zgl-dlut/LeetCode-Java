@@ -259,7 +259,7 @@ public class Palidromic {
 	public static void main(String[] args) {
 		String s= "A man, a plan, a canal: Panama";
 		Palidromic mock=new Palidromic();
-		System.out.println(mock.isPalindrome(s));
+		System.out.println(mock.longestPalindrome("babab"));
 	}
 
 	/**
