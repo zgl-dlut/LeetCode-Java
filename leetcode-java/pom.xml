@@ -40,14 +40,7 @@
 			<artifactId>commons-logging</artifactId>
 			<groupId>commons-logging</groupId>
 			<version>1.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>peiyou_backstage_opensource</groupId>
-			<artifactId>co-spring-cloud-gateway-plugins-client-supports</artifactId>
-			<version>1.4.3-SNAPSHOT</version>
-		</dependency>
-
+		</dependency
 	</dependencies>
 
 	<build>

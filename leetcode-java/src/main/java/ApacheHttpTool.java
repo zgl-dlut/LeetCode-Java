@@ -1,3 +1,4 @@
+/*
 import co.spring.cloud.gateway.plugins.client.supports.ApiSignatureSpec;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -11,10 +12,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+*/
 /**
  * @author zgl
  * @date 2019/8/30 下午3:34
- */
+ *//*
+
 public class ApacheHttpTool {
 
 	static Logger logger = Logger.getLogger("Demo");
@@ -119,4 +122,4 @@ public class ApacheHttpTool {
 					'}';
 		}
 	}
-}
+}*/
